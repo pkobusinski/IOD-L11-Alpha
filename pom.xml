@@ -12,8 +12,10 @@
     </parent>
 
     <groupId>pl.put.poznan</groupId>
-    <artifactId>io-project-architecture</artifactId>
-    <version>0.1</version>
+    <artifactId>building-info</artifactId>
+    <version>1.0</version>
+    <name>BuildingInfo</name>
+    <description>Project for subject IO on PUT</description>
 
 	<properties>
         <java.version>11</java.version>
