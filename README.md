@@ -22,4 +22,5 @@ Dla administratorów budynków, którzy pragną optymalizować koszty zarządzan
    - light – łączna moc oświetlenia
  
 ## Informacje o projekcie 
-[Definition of Done](https://docs.google.com/spreadsheets/d/e/2PACX-1vTn6j3M8pmGEzrsQk8mXse7lVHUdhYWkfxbkQiYI23rBtwM4N3bWw0qtupW-gesfCkcYasnZ-eEXl-F/pubhtml)
+[Definition of Done](https://docs.google.com/spreadsheets/d/e/2PACX-1vTn6j3M8pmGEzrsQk8mXse7lVHUdhYWkfxbkQiYI23rBtwM4N3bWw0qtupW-gesfCkcYasnZ-eEXl-F/pubhtml) <br/>
+[Zarządzanie rejestrem produktu i sprintu](https://docs.google.com/spreadsheets/d/1KLt9HXL6Aha6orhv00Ywbj6j-ZUO8qhp/edit?usp=sharing&ouid=107019924464445307168&rtpof=true&sd=true)
