@@ -17,7 +17,7 @@
     <name>BuildingInfo</name>
     <description>Project for subject IO on PUT</description>
 
-	<properties>
+    <properties>
         <java.version>11</java.version>
     </properties>
 

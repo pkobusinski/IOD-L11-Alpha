@@ -52,7 +52,7 @@ public class BuildingController {
 
     private static final Logger logger = LoggerFactory.getLogger(BuildingController.class);
 
-    private List<Building> buildings = new ArrayList<Building>();
+    public List<Building> buildings = new ArrayList<Building>();
 
     @GetMapping("/all-buildings")
     public List<Building> getAllBuildings() {
@@ -68,7 +68,6 @@ public class BuildingController {
 
     @RequestMapping(value="/{buildingId}/calculate/area", method = RequestMethod.GET, produces="application/json")
     public double calculateAreaOfBuilding(@PathVariable int buildingId) {
-
         Building building = getBuilding(buildingId);
         logger.debug("Calculating total area for building ID: {}", buildingId);
         return building.calculateAreaOfBuilding();
