@@ -74,7 +74,6 @@ public class BuildingController {
 
     @RequestMapping(value="/{buildingId}/calculate/area", method = RequestMethod.GET, produces="application/json")
     public double calculateAreaOfBuilding(@PathVariable int buildingId) {
-
         Building building = getBuilding(buildingId);
         logger.debug("Calculating total area for building ID: {}", buildingId);
         return building.calculateAreaOfBuilding();
