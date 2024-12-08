@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Building extends Location {
 
-    private List<Level> levelsInBuilding;
+    public List<Level> levelsInBuilding;
 
     public Building(int id, String name) {
         super(id, name);
@@ -80,6 +80,7 @@ public class Building extends Location {
     }
 
     public List<Level> getLevelsInBuilding() {
+        System.out.println("Levels in building: " + levelsInBuilding);
         return levelsInBuilding;
     }
 
