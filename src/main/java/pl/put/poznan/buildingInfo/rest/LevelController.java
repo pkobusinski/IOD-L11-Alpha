@@ -2,12 +2,14 @@ package pl.put.poznan.buildingInfo.rest;
 import java.util.ArrayList;
 import java.util.List;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
@@ -137,11 +139,20 @@ public class LevelController {
         logger.debug("Calculating total energy consumption for level ID: {} in Building with ID: {}", levelId, buildingId);
         return level.calculateEnergyConsumptionOnLevel();
     }
-//CO Z TYM ZROBIC ???
-/*     @RequestMapping(method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
-    public Level addLevel(@PathVariable int buildingId, @RequestBody Level level) {
+
+    @RequestMapping(value ="/addLevel", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+    public Level addLevel(@RequestBody Level level, @PathVariable int buildingId) {
         logger.debug("Adding level: {} to Building with ID: {}", level, buildingId);
-        levels.add(level);
+
+        Building building = buildingController.getBuilding(buildingId);
+        for (Level lvl :  building.getLevelsInBuilding()) {
+            if(lvl.getId() == level.getId()) {
+                logger.debug("Couldn't add level: {} to Building with ID: {}, because it already exists", level, buildingId);
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Level with ID: " + level.getId() + " already exists");
+            }
+        }
+
+        building.add(level);
         return level;
-    } */
+    }
 }

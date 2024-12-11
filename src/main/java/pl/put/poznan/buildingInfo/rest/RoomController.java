@@ -3,6 +3,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
+import pl.put.poznan.buildingInfo.logic.Building;
 import pl.put.poznan.buildingInfo.logic.Level;
 import pl.put.poznan.buildingInfo.logic.Room;
 import org.slf4j.Logger;
@@ -70,4 +71,19 @@ public class RoomController {
         return room.calculateEnergyConsumption();
     }
 
+    @RequestMapping(value ="/addRoom", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+    public Room addRoom(@RequestBody Room room, @PathVariable int buildingId, @PathVariable int levelId) {
+        logger.debug("Adding room: {} to level:{} in Building with ID: {}", room,  levelId, buildingId);
+
+        Level level = levelController.getLevel(buildingId, levelId);
+        for (Room rom : level.getRoomsOnLevel()) {
+            if(rom.getId() == room.getId()) {
+                logger.debug("Couldn't add room: {} to level:{} in Building with ID: {}, because it already exists", room,  levelId, buildingId);
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Room with ID: " + room.getId() + " already exists");
+            }
+        }
+
+        level.add(room);
+        return room;
+    }
 }
