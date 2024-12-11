@@ -4,11 +4,11 @@ public class Room extends Location {
 
     private double area;
     private double cube;
-    private float heating;
+    private double heating;
     private double light;
 
 
-    public Room(int id, String name, double area, double cube, float heating, double light) {
+    public Room(int id, String name, double area, double cube, double heating, double light) {
         super(id, name);
         this.area = area;
         this.cube = cube;

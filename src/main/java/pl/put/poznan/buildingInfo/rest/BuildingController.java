@@ -5,15 +5,14 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import pl.put.poznan.buildingInfo.logic.Building;
+import pl.put.poznan.buildingInfo.logic.Level;
+import pl.put.poznan.buildingInfo.logic.Room;
+
+import javax.annotation.PostConstruct;
 
 
 //@RestController
@@ -60,8 +59,31 @@ public class BuildingController {
 
     public List<Building> buildings = new ArrayList<Building>();
 
+    // Example buildings adding method
+    @PostConstruct
+    public void init() {
+        Room room1 = new Room(1001, "1A", 50.5, 120.0, 10.5, 20.0);
+        Room room2 = new Room(1002, "1B", 60.0, 150.0, 15.0, 30.0);
+        Level level1 = new Level(101, "Level 1");
+        level1.add(room1);
+        level1.add(room2);
+
+        Room room3 = new Room(2001, "2A", 70.0, 200.0, 20.0, 40.0);
+        Level level2 = new Level(102, "Level 2");
+        level2.add(room3);
+
+        Building building = new Building(1, "Building A");
+        building.add(level1);
+        building.add(level2);
+
+        buildings.add(building);
+
+        logger.info("Initialized buildings data with {} buildings.", buildings.size());
+    }
+
     @GetMapping("/all-buildings")
     public List<Building> getAllBuildings() {
+        logger.info("Retrieving all buildings. Total count: {}", buildings.size());
         return buildings;
     }
 
@@ -70,6 +92,35 @@ public class BuildingController {
         logger.debug("Building with ID: {}", buildingId);
         return buildings.stream().filter(b -> b.getId() == buildingId).findFirst()
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Building with ID: " + buildingId + " not found"));
+    }
+
+    @RequestMapping(method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+    public Building addBuilding(@RequestBody Building building) {
+        logger.info("Adding new building: {}", building);
+        if (buildings.stream().anyMatch(b -> b.getId() == building.getId())) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Building with ID: " + building.getId() + " already exists");
+        }
+        buildings.add(building);
+        logger.info("Building added successfully. Total buildings: {}", buildings.size());
+        return building;
+    }
+
+    @PutMapping("/{buildingId}")
+    public Building updateBuilding(@PathVariable int buildingId, @RequestBody Building updatedBuilding) {
+        logger.info("Updating building with ID: {}", buildingId);
+        Building building = getBuilding(buildingId);
+        building.setName(updatedBuilding.getName());
+        building.setLevelsInBuilding(updatedBuilding.getLevelsInBuilding());
+        logger.info("Building with ID: {} updated successfully.", buildingId);
+        return building;
+    }
+
+    @DeleteMapping("/{buildingId}")
+    public void deleteBuilding(@PathVariable int buildingId) {
+        logger.info("Deleting building with ID: {}", buildingId);
+        Building building = getBuilding(buildingId);
+        buildings.remove(building);
+        logger.info("Building with ID: {} deleted successfully. Remaining buildings: {}", buildingId, buildings.size());
     }
 
     @RequestMapping(value="/{buildingId}/calculate/area", method = RequestMethod.GET, produces="application/json")
@@ -99,15 +150,6 @@ public class BuildingController {
         logger.debug("Calculating total energy consumption for building ID: {}", buildingId);
         return building.calculateEnergyConsumptionOfBuilding();
     }
-
-    @RequestMapping(method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
-    public Building addBuilding(@RequestBody Building building) {
-
-        logger.debug("Adding building: {}", building);
-        buildings.add(building);
-        return building;
-    }
-
 }
 
 

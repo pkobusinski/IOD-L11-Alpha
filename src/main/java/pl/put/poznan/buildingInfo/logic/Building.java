@@ -79,6 +79,10 @@ public class Building extends Location {
         return this.name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public List<Level> getLevelsInBuilding() {
         System.out.println("Levels in building: " + levelsInBuilding);
         return levelsInBuilding;

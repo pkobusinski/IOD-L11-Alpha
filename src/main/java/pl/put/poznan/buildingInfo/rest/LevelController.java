@@ -58,19 +58,16 @@ import pl.put.poznan.buildingInfo.logic.Level;
 @RequestMapping("/buildings/{buildingId}")
 public class LevelController {
 
-    
     private static final Logger logger = LoggerFactory.getLogger(LevelController.class);
     private final BuildingController buildingController;
     
 
-        @Autowired
-        public LevelController(BuildingController buildingController) {
+    @Autowired
+    public LevelController(BuildingController buildingController) {
         this.buildingController = buildingController;
     }
     
     public List<Level> levels = new ArrayList<Level>();
-
-
 
     @RequestMapping(value = "/all-levels", method = RequestMethod.GET, produces = "application/json")
     public List<Level> getAllLevels(@PathVariable int buildingId) {
