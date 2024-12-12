@@ -18,41 +18,6 @@ import pl.put.poznan.buildingInfo.logic.Building;
 import pl.put.poznan.buildingInfo.logic.Level;
 
 
-//@RestController
-//@RequestMapping("/{text}")
-//public class BuildingInfoController {
-//
-//    private static final Logger logger = LoggerFactory.getLogger(BuildingInfoController.class);
-//
-//    @RequestMapping(method = RequestMethod.GET, produces = "application/json")
-//    public String get(@PathVariable String text,
-//                              @RequestParam(value="transforms", defaultValue="upper,escape") String[] transforms) {
-//
-//        // log the parameters
-//        logger.debug(text);
-//        logger.debug(Arrays.toString(transforms));
-//
-//        // perform the transformation, you should run your logic here, below is just a silly example
-//        TextTransformer transformer = new TextTransformer(transforms);
-//        return transformer.transform(text);
-//    }
-//
-//    @RequestMapping(method = RequestMethod.POST, produces = "application/json")
-//    public String post(@PathVariable String text,
-//                      @RequestBody String[] transforms) {
-//
-//        // log the parameters
-//        logger.debug(text);
-//        logger.debug(Arrays.toString(transforms));
-//
-//        // perform the transformation, you should run your logic here, below is just a silly example
-//        TextTransformer transformer = new TextTransformer(transforms);
-//        return transformer.transform(text);
-//    }
-//
-//
-//
-//}
 
 @RestController
 @RequestMapping("/buildings/{buildingId}")
@@ -91,6 +56,21 @@ public class LevelController {
             return levels;
     }
 
+    @RequestMapping(method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+    public Level addLevel(@RequestBody Level level, @PathVariable int buildingId) {
+        logger.debug("Adding level: {} to Building with ID: {}", level, buildingId);
+
+        Building building = buildingController.getBuilding(buildingId);
+        for (Level lvl :  building.getLevelsInBuilding()) {
+            if(lvl.getId() == level.getId()) {
+                logger.debug("Couldn't add level: {} to Building with ID: {}, because it already exists", level, buildingId);
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Level with ID: " + level.getId() + " already exists");
+            }
+        }
+
+        building.add(level);
+        return level;
+    }
 
     @RequestMapping(value = "/{levelId}", method = RequestMethod.GET, produces = "application/json")
     public Level getLevel(@PathVariable int buildingId, @PathVariable int levelId) {
@@ -137,19 +117,4 @@ public class LevelController {
         return level.calculateEnergyConsumptionOnLevel();
     }
 
-    @RequestMapping(value ="/addLevel", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
-    public Level addLevel(@RequestBody Level level, @PathVariable int buildingId) {
-        logger.debug("Adding level: {} to Building with ID: {}", level, buildingId);
-
-        Building building = buildingController.getBuilding(buildingId);
-        for (Level lvl :  building.getLevelsInBuilding()) {
-            if(lvl.getId() == level.getId()) {
-                logger.debug("Couldn't add level: {} to Building with ID: {}, because it already exists", level, buildingId);
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Level with ID: " + level.getId() + " already exists");
-            }
-        }
-
-        building.add(level);
-        return level;
-    }
 }

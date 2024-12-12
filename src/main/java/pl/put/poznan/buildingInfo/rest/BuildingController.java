@@ -123,28 +123,28 @@ public class BuildingController {
         logger.info("Building with ID: {} deleted successfully. Remaining buildings: {}", buildingId, buildings.size());
     }
 
-    @RequestMapping(value="/{buildingId}/calculate/area", method = RequestMethod.GET, produces="application/json")
+    @RequestMapping(value="/{buildingId}/area", method = RequestMethod.GET, produces="application/json")
     public double calculateAreaOfBuilding(@PathVariable int buildingId) {
         Building building = getBuilding(buildingId);
         logger.debug("Calculating total area for building ID: {}", buildingId);
         return building.calculateAreaOfBuilding();
     }
 
-    @RequestMapping(value="/{buildingId}/calculate/cube", method = RequestMethod.GET, produces="application/json")
+    @RequestMapping(value="/{buildingId}/cube", method = RequestMethod.GET, produces="application/json")
     public double calculateCubeOfBuilding(@PathVariable int buildingId) {
         Building building = getBuilding(buildingId);
         logger.debug("Calculating total cube for building ID: {}", buildingId);
         return building.calculateCubeOfBuilding();
     }
 
-    @RequestMapping(value="/{buildingId}/calculate/light-power", method = RequestMethod.GET, produces="application/json")
+    @RequestMapping(value="/{buildingId}/light-power", method = RequestMethod.GET, produces="application/json")
     public double calculateLightPowerOfBuilding(@PathVariable int buildingId) {
         Building building = getBuilding(buildingId);
         logger.debug("Calculating total light power for building ID: {}", buildingId);
         return building.calculateLightPowerOfBuilding();
     }
 
-    @RequestMapping(value="/{buildingId}/calculate/energy-consumption", method = RequestMethod.GET, produces="application/json")
+    @RequestMapping(value="/{buildingId}/energy-consumption", method = RequestMethod.GET, produces="application/json")
     public double calculateEnergyConsumptionOfBuilding(@PathVariable int buildingId) {
         Building building = getBuilding(buildingId);
         logger.debug("Calculating total energy consumption for building ID: {}", buildingId);

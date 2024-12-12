@@ -55,4 +55,12 @@ public class Room extends Location {
         return this.name;
     }
 
+    public void setName(String name) {this.name = name;}
+
+    public void setArea(double area) {this.area = area;}
+
+    public void setCube(double cube) {
+        this.cube = cube;
+    }
+
 }
