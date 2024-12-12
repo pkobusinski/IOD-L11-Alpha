@@ -89,28 +89,28 @@ public class LevelController {
     }
 
 
-    @RequestMapping(value="/{levelId}/calculate/area", method = RequestMethod.GET, produces="application/json")
+    @RequestMapping(value="/{levelId}/area", method = RequestMethod.GET, produces="application/json")
     public double calculateAreaOfLevel(@PathVariable int buildingId, @PathVariable int levelId) {
         Level level = getLevel(buildingId, levelId);
         logger.debug("Calculating total area for level ID: {} in Building with ID: {}", levelId, buildingId);
         return level.calculateAreaOnLevel();
     }
 
-    @RequestMapping(value="/{levelId}/calculate/cube", method = RequestMethod.GET, produces="application/json")
+    @RequestMapping(value="/{levelId}/cube", method = RequestMethod.GET, produces="application/json")
     public double calculateCubeOfLevel(@PathVariable int buildingId, @PathVariable int levelId) {
         Level level = getLevel(buildingId, levelId);
         logger.debug("Calculating total cube for level ID: {} in Building with ID: {}", levelId, buildingId);
         return level.calculateCubeOnLevel();
     }
 
-    @RequestMapping(value="/{levelId}/calculate/light-power", method = RequestMethod.GET, produces="application/json")
+    @RequestMapping(value="/{levelId}/light-power", method = RequestMethod.GET, produces="application/json")
     public double calculateLightPowerOfLevel(@PathVariable int buildingId, @PathVariable int levelId) {
         Level level = getLevel(buildingId, levelId);
         logger.debug("Calculating total light power for level ID: {} in Building with ID: {}", levelId, buildingId);
         return level.calculateLightPowerOnLevel();
     }
 
-    @RequestMapping(value="/{levelId}/calculate/energy-consumption", method = RequestMethod.GET, produces="application/json")
+    @RequestMapping(value="/{levelId}/energy-consumption", method = RequestMethod.GET, produces="application/json")
     public double calculateEnergyConsumptionOfLevel(@PathVariable int buildingId, @PathVariable int levelId) {
         Level level = getLevel(buildingId, levelId);
         logger.debug("Calculating total energy consumption for level ID: {} in Building with ID: {}", levelId, buildingId);
