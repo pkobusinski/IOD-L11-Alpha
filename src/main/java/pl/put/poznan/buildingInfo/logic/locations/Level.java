@@ -1,9 +1,9 @@
 package pl.put.poznan.buildingInfo.logic.locations;
 
-import pl.put.poznan.buildingInfo.logic.visitors.Visitor;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import pl.put.poznan.buildingInfo.logic.visitors.Visitor;
 /**
  * Klasa reprezentujaca poziom (pietro) w hierarchii lokalizacji.
  *
@@ -76,6 +76,14 @@ public class Level extends Location {
      */
     public String getName() {
         return this.name;
+    }
+
+    /**
+     * Setter nazwy poziomu.
+     * @param name
+     */
+    public void setName(String name) {
+        this.name = name;
     }
 
     /**

@@ -4,17 +4,23 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import pl.put.poznan.buildingInfo.logic.locations.Building;
 import pl.put.poznan.buildingInfo.logic.locations.Level;
 import pl.put.poznan.buildingInfo.logic.locations.Room;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import pl.put.poznan.buildingInfo.logic.visitors.AreaVisitor;
 import pl.put.poznan.buildingInfo.logic.visitors.CubeVisitor;
 import pl.put.poznan.buildingInfo.logic.visitors.EnergyVisitor;
@@ -51,7 +57,7 @@ public class RoomController {
      * @throws ResponseStatusException jeśli poziom o podanym identyfikatorze nie istnieje
      */
     @RequestMapping(value = "/all-rooms", method = RequestMethod.GET, produces = "application/json")
-    public List<Room> getAllLevels(@PathVariable int buildingId, @PathVariable int levelId) {
+    public List<Room> getAllRooms(@PathVariable int buildingId, @PathVariable int levelId) {
         logger.debug("Entering getAllRooms method for Building with ID: {}", buildingId);
 
         Level level = levelController.getLevel(buildingId, levelId);
@@ -134,7 +140,7 @@ public class RoomController {
      * @throws ResponseStatusException jeśli pomieszczenie o podanym identyfikatorze nie istnieje
      */
     @DeleteMapping("/{roomId}")
-    public void deleteBuilding(@PathVariable int roomId, @PathVariable int buildingId, @PathVariable int levelId) {
+    public void deleteRoom(@PathVariable int roomId, @PathVariable int buildingId, @PathVariable int levelId) {
         logger.info("Deleting room with ID: {}",roomId);
         Level level = levelController.getLevel(buildingId, levelId);
         Room room = level.getRoomsOnLevel()
@@ -226,7 +232,7 @@ public class RoomController {
      * @return całkowita moc oświetlenia pomieszczenia (w watach)
      */
     @RequestMapping(value="/{roomId}/light", method = RequestMethod.GET, produces="application/json")
-    public ResponseEntity<Map<String, Object>> calculateLightPowerOfBuilding(@PathVariable int buildingId, @PathVariable int levelId, @PathVariable int roomId) {
+    public ResponseEntity<Map<String, Object>> getLightPowerOfBuilding(@PathVariable int buildingId, @PathVariable int levelId, @PathVariable int roomId) {
         Room room = getRoom(buildingId, levelId, roomId);
         LightVisitor lightVisitor = new LightVisitor();
         logger.debug("Calculating total light power for room ID: {}", roomId);
@@ -248,7 +254,7 @@ public class RoomController {
      * @return całkowite zużycie energii pomieszczenia (w kilowatogodzinach)
      */
     @RequestMapping(value="/{roomId}/energy-consumption", method = RequestMethod.GET, produces="application/json")
-    public ResponseEntity<Map<String, Object>> calculateEnergyConsumptionOfBuilding(@PathVariable int buildingId, @PathVariable int levelId, @PathVariable int roomId) {
+    public ResponseEntity<Map<String, Object>> getEnergyConsumptionOfBuilding(@PathVariable int buildingId, @PathVariable int levelId, @PathVariable int roomId) {
         Room room = getRoom(buildingId, levelId, roomId);
         EnergyVisitor energyVisitor = new EnergyVisitor();
         logger.debug("Calculating total energy consumption for room ID: {}", roomId);
