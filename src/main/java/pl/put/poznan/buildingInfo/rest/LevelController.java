@@ -18,6 +18,16 @@ import pl.put.poznan.buildingInfo.logic.Building;
 import pl.put.poznan.buildingInfo.logic.Level;
 
 
+/**
+ * Kontroler obsługujący operacje CRUD dla poziomów ({@link Level}) w ramach budynków ({@link Building}).
+ *
+ * Umożliwia zarządzanie poziomami w budynkach, w tym ich dodawanie, usuwanie i pobieranie,
+ * a także wykonywanie obliczeń takich jak sumaryczna powierzchnia, kubatura,
+ * moc oświetlenia oraz zużycie energii na poziomach.
+ *
+ * Wszystkie operacje są wykonywane w kontekście konkretnego budynku, którego identyfikator
+ * jest przekazywany jako część ścieżki API.
+ */
 
 @RestController
 @RequestMapping("/buildings/{buildingId}")
@@ -34,6 +44,13 @@ public class LevelController {
     
     public List<Level> levels = new ArrayList<Level>();
 
+    /**
+     * Pobiera wszystkie poziomy (levels) dla konkretnego budynku.
+     *
+     * @param buildingId identyfikator budynku, którego poziomy mają zostać pobrane
+     * @return lista wszystkich poziomów w danym budynku
+     * @throws ResponseStatusException jeśli budynek o podanym identyfikatorze nie istnieje
+     */
     @RequestMapping(value = "/all-levels", method = RequestMethod.GET, produces = "application/json")
     public List<Level> getAllLevels(@PathVariable int buildingId) {
             logger.debug("Entering getAllLevels method for Building with ID: {}", buildingId);
@@ -56,6 +73,14 @@ public class LevelController {
             return levels;
     }
 
+    /**
+     * Dodaje nowy poziom do wskazanego budynku.
+     *
+     * @param level obiekt poziomu do dodania
+     * @param buildingId identyfikator budynku, do którego poziom ma zostać dodany
+     * @return dodany poziom
+     * @throws ResponseStatusException jeśli poziom o podanym identyfikatorze już istnieje w budynku
+     */
     @RequestMapping(method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     public Level addLevel(@RequestBody Level level, @PathVariable int buildingId) {
         logger.debug("Adding level: {} to Building with ID: {}", level, buildingId);
@@ -72,6 +97,14 @@ public class LevelController {
         return level;
     }
 
+    /**
+     * Pobiera szczegóły konkretnego poziomu na podstawie jego identyfikatora i identyfikatora budynku.
+     *
+     * @param buildingId identyfikator budynku, w którym znajduje się poziom
+     * @param levelId identyfikator poziomu do pobrania
+     * @return szczegóły poziomu
+     * @throws ResponseStatusException jeśli poziom o podanym identyfikatorze nie istnieje w budynku
+     */
     @RequestMapping(value = "/{levelId}", method = RequestMethod.GET, produces = "application/json")
     public Level getLevel(@PathVariable int buildingId, @PathVariable int levelId) {
         logger.debug("Fetching level: {} of building: {}", levelId, buildingId);
@@ -89,6 +122,14 @@ public class LevelController {
     }
 
 
+    /**
+     * Oblicza całkowitą powierzchnię dla konkretnego poziomu w danym budynku.
+     *
+     * @param buildingId identyfikator budynku, w którym znajduje się poziom
+     * @param levelId identyfikator poziomu, dla którego powierzchnia ma zostać obliczona
+     * @return całkowita powierzchnia poziomu w metrach kwadratowych
+     * @throws ResponseStatusException jeśli poziom o podanym identyfikatorze nie istnieje
+     */
     @RequestMapping(value="/{levelId}/area", method = RequestMethod.GET, produces="application/json")
     public double calculateAreaOfLevel(@PathVariable int buildingId, @PathVariable int levelId) {
         Level level = getLevel(buildingId, levelId);
@@ -96,6 +137,14 @@ public class LevelController {
         return level.calculateAreaOnLevel();
     }
 
+    /**
+     * Oblicza całkowitą kubaturę dla konkretnego poziomu w danym budynku.
+     *
+     * @param buildingId identyfikator budynku, w którym znajduje się poziom
+     * @param levelId identyfikator poziomu, dla którego kubatura ma zostać obliczona
+     * @return całkowita kubatura poziomu w metrach sześciennych
+     * @throws ResponseStatusException jeśli poziom o podanym identyfikatorze nie istnieje
+     */
     @RequestMapping(value="/{levelId}/cube", method = RequestMethod.GET, produces="application/json")
     public double calculateCubeOfLevel(@PathVariable int buildingId, @PathVariable int levelId) {
         Level level = getLevel(buildingId, levelId);
@@ -103,6 +152,14 @@ public class LevelController {
         return level.calculateCubeOnLevel();
     }
 
+    /**
+     * Oblicza całkowitą moc oświetlenia dla konkretnego poziomu w danym budynku.
+     *
+     * @param buildingId identyfikator budynku, w którym znajduje się poziom
+     * @param levelId identyfikator poziomu, dla którego moc oświetlenia ma zostać obliczona
+     * @return całkowita moc oświetlenia poziomu w watach
+     * @throws ResponseStatusException jeśli poziom o podanym identyfikatorze nie istnieje
+     */
     @RequestMapping(value="/{levelId}/light-power", method = RequestMethod.GET, produces="application/json")
     public double calculateLightPowerOfLevel(@PathVariable int buildingId, @PathVariable int levelId) {
         Level level = getLevel(buildingId, levelId);
@@ -110,6 +167,14 @@ public class LevelController {
         return level.calculateLightPowerOnLevel();
     }
 
+    /**
+     * Oblicza całkowite zużycie energii na ogrzewanie dla konkretnego poziomu w danym budynku.
+     *
+     * @param buildingId identyfikator budynku, w którym znajduje się poziom
+     * @param levelId identyfikator poziomu, dla którego zużycie energii ma zostać obliczone
+     * @return całkowite zużycie energii poziomu w kilowatogodzinach
+     * @throws ResponseStatusException jeśli poziom o podanym identyfikatorze nie istnieje
+     */
     @RequestMapping(value="/{levelId}/energy-consumption", method = RequestMethod.GET, produces="application/json")
     public double calculateEnergyConsumptionOfLevel(@PathVariable int buildingId, @PathVariable int levelId) {
         Level level = getLevel(buildingId, levelId);
