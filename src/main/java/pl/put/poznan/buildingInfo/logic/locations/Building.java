@@ -1,10 +1,12 @@
-package pl.put.poznan.buildingInfo.logic;
+package pl.put.poznan.buildingInfo.logic.locations;
+
+import pl.put.poznan.buildingInfo.logic.visitors.Visitor;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Klasa ktora reprezentuje budynek, najwyzej w hierarchii lokalizacji
+ * Klasa, która reprezentuje budynek, najwyżej w hierarchii lokalizacji
  *
  * Budynek moze sie skladac z wielu pieter, ktore sa reprezentacjami
  * klasy Level.
@@ -41,7 +43,7 @@ public class Building extends Location {
     }
 
     /**
-     * Funkaja pozwala usuwac poziomy klasy Level z budynku.
+     * Funkcja pozwala usuwac poziomy klasy Level z budynku.
      * @param location
      */
     @Override
@@ -51,66 +53,6 @@ public class Building extends Location {
         } else {
             throw new IllegalArgumentException("Provided location is not a Level. Only Levels can be removed from Building.");
         }
-    }
-
-    /**
-     * Funkcja wyswietla informacje o budynku i rekurencyjnie
-     * o wszystkich lokacjach podrzednych.
-     */
-    @Override
-    public void display() {
-        System.out.println("Building " + name + " with id " + id + ":");
-        for (Level level : levelsInBuilding) {
-            level.display();
-        }
-    }
-
-    /**
-     * Podlicza laczna powierzchnie budynku.
-     * @return double
-     */
-    public double calculateAreaOfBuilding() {
-        double area = 0;
-        for (Level level : levelsInBuilding) {
-            area += level.calculateAreaOnLevel();
-        }
-        return area;
-    }
-
-    /**
-     * Podlicza laczna kubature budynku.
-     * @return double
-     */
-    public double calculateCubeOfBuilding() {
-        double cube = 0;
-        for (Level level : levelsInBuilding) {
-            cube += level.calculateCubeOnLevel();
-        }
-        return cube;
-    }
-
-    /**
-     * Podlicza laczna moc oswietlenia budynku.
-     * @return double
-     */
-    public double calculateLightPowerOfBuilding() {
-        double lightPower = 0;
-        for (Level level : levelsInBuilding) {
-            lightPower += level.calculateLightPowerOnLevel();
-        }
-        return lightPower;
-    }
-
-    /**
-     * Podlicza laczne zurzycie energii na ogrzewanie w budynku.
-     * @return double
-     */
-    public double calculateEnergyConsumptionOfBuilding() {
-        double energyConsumption = 0;
-        for (Level level : levelsInBuilding) {
-            energyConsumption += level.calculateEnergyConsumptionOnLevel();
-        }
-        return energyConsumption;
     }
 
     /**
@@ -153,5 +95,11 @@ public class Building extends Location {
      */
     public void setLevelsInBuilding(List<Level> levelsInBuilding) {
         this.levelsInBuilding = levelsInBuilding;
+    }
+
+
+    @Override
+    public double accept(Visitor visitor) {
+        return visitor.visit(this);
     }
 }

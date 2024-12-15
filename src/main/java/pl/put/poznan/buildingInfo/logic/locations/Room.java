@@ -1,4 +1,6 @@
-package pl.put.poznan.buildingInfo.logic;
+package pl.put.poznan.buildingInfo.logic.locations;
+
+import pl.put.poznan.buildingInfo.logic.visitors.Visitor;
 
 /**
  * Klasa ktora reprezentuje pokoj, najnizej w hierarchii lokalizacji
@@ -65,27 +67,6 @@ public class Room extends Location {
     }
 
     /**
-     * Wypisuje parametry pokoju.
-     */
-    @Override
-    public void display() {
-        System.out.println("Room " + name + " with id " + id + ": area: " + area + ", cube: " + cube + ", heating: " + heating + ", light: " + light);
-    }
-    /**
-     * Oblicza moc oswietlenia w pokoju.
-     * @return
-     */
-    public double calculateLightPower () {
-        return this.light / this.cube;
-    }
-    /**
-     * Oblicza zuzycie energii w pokoju.
-     * @return
-     */
-    public double calculateEnergyConsumption () {
-        return this.heating / this.cube;
-    }
-    /**
      * Zwraca powierzchnie pokoju.
      * @return
      */
@@ -99,6 +80,23 @@ public class Room extends Location {
     public double getCube() {
         return cube;
     }
+
+    public double getHeating() {
+        return heating;
+    }
+
+    public void setHeating(double heating) {
+        this.heating = heating;
+    }
+
+    public double getLight() {
+        return light;
+    }
+
+    public void setLight(double light) {
+        this.light = light;
+    }
+
     /**
      * @return id pokoju.
      */
@@ -119,7 +117,7 @@ public class Room extends Location {
     public void setName(String name) {this.name = name;}
 
     /**
-     * Pozwala na ustawienie powierzchni pokoju,.
+     * Pozwala na ustawienie powierzchni pokoju.
      * @param area
      */
     public void setArea(double area) {this.area = area;}
@@ -132,4 +130,8 @@ public class Room extends Location {
         this.cube = cube;
     }
 
+    @Override
+    public double accept(Visitor visitor) {
+        return visitor.visit(this);
+    }
 }

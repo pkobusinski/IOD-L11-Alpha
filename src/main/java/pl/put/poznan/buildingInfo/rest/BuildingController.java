@@ -1,59 +1,28 @@
 package pl.put.poznan.buildingInfo.rest;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import pl.put.poznan.buildingInfo.logic.Building;
-import pl.put.poznan.buildingInfo.logic.Level;
-import pl.put.poznan.buildingInfo.logic.Room;
+import pl.put.poznan.buildingInfo.logic.locations.Building;
+import pl.put.poznan.buildingInfo.logic.locations.Level;
+import pl.put.poznan.buildingInfo.logic.locations.Room;
+import pl.put.poznan.buildingInfo.logic.visitors.AreaVisitor;
+import pl.put.poznan.buildingInfo.logic.visitors.CubeVisitor;
+import pl.put.poznan.buildingInfo.logic.visitors.EnergyVisitor;
+import pl.put.poznan.buildingInfo.logic.visitors.LightVisitor;
 
 import javax.annotation.PostConstruct;
 
-
-//@RestController
-//@RequestMapping("/{text}")
-//public class BuildingInfoController {
-//
-//    private static final Logger logger = LoggerFactory.getLogger(BuildingInfoController.class);
-//
-//    @RequestMapping(method = RequestMethod.GET, produces = "application/json")
-//    public String get(@PathVariable String text,
-//                              @RequestParam(value="transforms", defaultValue="upper,escape") String[] transforms) {
-//
-//        // log the parameters
-//        logger.debug(text);
-//        logger.debug(Arrays.toString(transforms));
-//
-//        // perform the transformation, you should run your logic here, below is just a silly example
-//        TextTransformer transformer = new TextTransformer(transforms);
-//        return transformer.transform(text);
-//    }
-//
-//    @RequestMapping(method = RequestMethod.POST, produces = "application/json")
-//    public String post(@PathVariable String text,
-//                      @RequestBody String[] transforms) {
-//
-//        // log the parameters
-//        logger.debug(text);
-//        logger.debug(Arrays.toString(transforms));
-//
-//        // perform the transformation, you should run your logic here, below is just a silly example
-//        TextTransformer transformer = new TextTransformer(transforms);
-//        return transformer.transform(text);
-//    }
-//
-//
-//
-//}
-
 /**
  * Kontroler obsługujący operacje CRUD dla budynków oraz dodatkowe obliczenia związane z ich właściwościami.
- *
  * Umożliwia zarządzanie budynkami, w tym dodawanie, aktualizowanie i usuwanie,
  * a także obliczanie sumarycznej powierzchni, kubatury, mocy oświetlenia i zużycia energii.
  */
@@ -167,56 +136,89 @@ public class BuildingController {
     }
 
     /**
-     * Oblicza łączną powierzchnię budynku.
+     * Oblicza łączną powierzchnię budynku i zwraca ją w formacie JSON.
      *
-     * @param buildingId identyfikator budynku
-     * @return sumaryczna powierzchnia budynku
+     * @param buildingId identyfikator budynku, dla którego ma zostać obliczona powierzchnia
+     * @return ResponseEntity zawierający wartość sumarycznej powierzchni budynku w formacie JSON
+     * @throws ResponseStatusException jeśli budynek o podanym identyfikatorze nie istnieje
      */
-    @RequestMapping(value="/{buildingId}/area", method = RequestMethod.GET, produces="application/json")
-    public double calculateAreaOfBuilding(@PathVariable int buildingId) {
+    @RequestMapping(value = "/{buildingId}/area", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<Map<String, Object>> calculateAreaOfBuilding(@PathVariable int buildingId) {
         Building building = getBuilding(buildingId);
+        AreaVisitor areaVisitor = new AreaVisitor();
         logger.debug("Calculating total area for building ID: {}", buildingId);
-        return building.calculateAreaOfBuilding();
+
+        double area = areaVisitor.visit(building);
+        logger.info("Total area for building ID {}: {}", buildingId, area);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("area:", area);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     /**
-     * Oblicza łączną kubaturę budynku.
+     * Oblicza łączną kubaturę budynku i zwraca ją w formacie JSON.
      *
-     * @param buildingId identyfikator budynku
-     * @return sumaryczna kubatura budynku
+     * @param buildingId identyfikator budynku, dla którego ma zostać obliczona kubatura
+     * @return ResponseEntity zawierający wartość sumarycznej kubatury budynku w formacie JSON
+     * @throws ResponseStatusException jeśli budynek o podanym identyfikatorze nie istnieje
      */
-    @RequestMapping(value="/{buildingId}/cube", method = RequestMethod.GET, produces="application/json")
-    public double calculateCubeOfBuilding(@PathVariable int buildingId) {
+    @RequestMapping(value = "/{buildingId}/cube", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<Map<String, Object>> calculateCubeOfBuilding(@PathVariable int buildingId) {
         Building building = getBuilding(buildingId);
+        CubeVisitor cubeVisitor = new CubeVisitor();
         logger.debug("Calculating total cube for building ID: {}", buildingId);
-        return building.calculateCubeOfBuilding();
+
+        double cube = cubeVisitor.visit(building);
+        logger.info("Total cube for building ID {}: {}", buildingId, cube);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("cube:", cube);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     /**
-     * Oblicza łączną moc oświetlenia budynku.
+     * Oblicza łączną moc oświetlenia budynku i zwraca ją w formacie JSON.
      *
-     * @param buildingId identyfikator budynku
-     * @return sumaryczna moc oświetlenia budynku
+     * @param buildingId identyfikator budynku, dla którego ma zostać obliczona moc oświetlenia.
+     * @return ResponseEntity zawierający wartość sumarycznej mocy oświetlenia budynku w formacie JSON
+     * @throws ResponseStatusException jeśli budynek o podanym identyfikatorze nie istnieje
      */
-    @RequestMapping(value="/{buildingId}/light-power", method = RequestMethod.GET, produces="application/json")
-    public double calculateLightPowerOfBuilding(@PathVariable int buildingId) {
+    @RequestMapping(value = "/{buildingId}/light", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<Map<String, Object>> calculateLightPowerOfBuilding(@PathVariable int buildingId) {
         Building building = getBuilding(buildingId);
+        LightVisitor lightVisitor = new LightVisitor();
         logger.debug("Calculating total light power for building ID: {}", buildingId);
-        return building.calculateLightPowerOfBuilding();
+
+        double light = lightVisitor.visit(building);
+        logger.info("Total light power for building ID {}: {}", buildingId, light);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("light power:", light);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     /**
-     * Oblicza łączne zużycie energii na ogrzewanie w budynku.
+     * Oblicza łączne zużycie energii na ogrzewanie w budynku i zwraca je w formacie JSON.
      *
-     * @param buildingId identyfikator budynku
-     * @return sumaryczne zużycie energii na ogrzewanie w budynku
+     * @param buildingId identyfikator budynku, dla którego ma zostać obliczone zużycie energii na ogrzewanie.
+     * @return ResponseEntity zawierający wartość sumarycznego zużycia energii na ogrzewanie w budynku w formacie JSON
+     * @throws ResponseStatusException jeśli budynek o podanym identyfikatorze nie istnieje
      */
-    @RequestMapping(value="/{buildingId}/energy-consumption", method = RequestMethod.GET, produces="application/json")
-    public double calculateEnergyConsumptionOfBuilding(@PathVariable int buildingId) {
+    @RequestMapping(value = "/{buildingId}/energy", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<Map<String, Object>> calculateEnergyConsumption(@PathVariable int buildingId) {
         Building building = getBuilding(buildingId);
+        EnergyVisitor energyVisitor = new EnergyVisitor();
         logger.debug("Calculating total energy consumption for building ID: {}", buildingId);
-        return building.calculateEnergyConsumptionOfBuilding();
+
+        double energy = energyVisitor.visit(building);
+        logger.info("Total energy consumption for building ID {}: {}", buildingId, energy);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("energy consumption:", energy);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
+
 }
 
 

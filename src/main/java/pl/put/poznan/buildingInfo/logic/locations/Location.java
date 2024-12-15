@@ -1,12 +1,12 @@
-package pl.put.poznan.buildingInfo.logic;
+package pl.put.poznan.buildingInfo.logic.locations;
 
 /**
- * Klasa abstrakcyjna, reprezentuje lokalizacje, ktora moze byc budynkiem,
+ * Klasa abstrakcyjna, która reprezentuje lokalizacje, ktora moze byc budynkiem,
  * poziomem lub pokojem.
  *
  * Sluzy jako baza do implementacji roznych typow lokalizacji.
  */
-public abstract class Location {
+public abstract class Location implements Visitable {
 
     /**
      * Identyfikator lokalizacji.
@@ -44,15 +44,6 @@ public abstract class Location {
      * Sluzy do zarzadzania struktura hierarchiczna.
      */
     public abstract void remove(Location location);
-
-    /**
-     * Dodaje podlokacje do lokacji.
-     *
-     * Metoda abstrakcyjna, ktora posiada implementacje
-     * w konkretnej klasie dziedziczacej.
-     * Sluzy do prezentacji informacji o lokacji wraz z lokacjami podrzednymi.
-     */
-    public abstract void display();
 
 
 }

@@ -1,4 +1,6 @@
-package pl.put.poznan.buildingInfo.logic;
+package pl.put.poznan.buildingInfo.logic.locations;
+
+import pl.put.poznan.buildingInfo.logic.visitors.Visitor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,68 +61,6 @@ public class Level extends Location {
     }
 
     /**
-     * Wyswietla informacje o poziomie oraz wszystkich jego pomieszczeniach.
-     */
-    @Override
-    public void display() {
-        System.out.println("Level " + name + " with id " + id + ":");
-        for (Room room : roomsOnLevel) {
-            room.display();
-        }
-    }
-
-    /**
-     * Oblicza sumaryczna powierzchnie wszystkich pokojow na poziomie.
-     *
-     * @return laczna powierzchnia (w metrach kwadratowych)
-     */
-    public double calculateAreaOnLevel() {
-        double area = 0;
-        for (Room room : roomsOnLevel) {
-            area += room.getArea();
-        }
-        return area;
-    }
-
-    /**
-     * Oblicza sumaryczna kubature wszystkich pokojow na poziomie.
-     *
-     * @return laczna kubatura (w metrach szesciennych)
-     */
-    public double calculateCubeOnLevel() {
-        double cube = 0;
-        for (Room room : roomsOnLevel) {
-            cube += room.getCube();
-        }
-        return cube;
-    }
-    /**
-     * Oblicza sumaryczna moc oswietlenia dla wszystkich pokojow na poziomie.
-     *
-     * @return laczna moc oswietlenia
-     */
-    public double calculateLightPowerOnLevel() {
-        double lightPower = 0;
-        for (Room room : roomsOnLevel) {
-            lightPower += room.calculateLightPower();
-        }
-        return lightPower;
-    }
-
-    /**
-     * Oblicza sumaryczne zuzycie energii na ogrzewanie dla wszystkich pokojow na poziomie.
-     *
-     * @return laczne zuzycie energii
-     */
-    public double calculateEnergyConsumptionOnLevel() {
-        double energyConsumption = 0;
-        for (Room room : roomsOnLevel) {
-            energyConsumption += room.calculateEnergyConsumption();
-        }
-        return energyConsumption;
-    }
-
-    /**
      * Zwraca identyfikator poziomu.
      *
      * @return identyfikator poziomu
@@ -154,5 +94,10 @@ public class Level extends Location {
      */
     public void setRoomsOnLevel(List<Room> roomsOnLevel) {
         this.roomsOnLevel = roomsOnLevel;
+    }
+
+    @Override
+    public double accept(Visitor visitor) {
+        return visitor.visit(this);
     }
 }
