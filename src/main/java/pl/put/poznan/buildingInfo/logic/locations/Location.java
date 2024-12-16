@@ -1,5 +1,7 @@
 package pl.put.poznan.buildingInfo.logic.locations;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Klasa abstrakcyjna, która reprezentuje lokalizacje, ktora moze byc budynkiem,
  * poziomem lub pokojem.

@@ -1,5 +1,6 @@
 package pl.put.poznan.buildingInfo.logic.locations;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import pl.put.poznan.buildingInfo.logic.visitors.Visitor;
 
 import java.util.ArrayList;
@@ -27,6 +28,11 @@ public class Building extends Location {
     public Building(int id, String name) {
         super(id, name);
         this.levelsInBuilding = new ArrayList<Level>();
+    }
+
+    public Building() {
+        super(0, "");
+        this.levelsInBuilding = new ArrayList<>();
     }
 
     /**

@@ -3,6 +3,7 @@ package pl.put.poznan.buildingInfo.logic.locations;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import pl.put.poznan.buildingInfo.logic.visitors.Visitor;
 /**
  * Klasa reprezentujaca poziom (pietro) w hierarchii lokalizacji.
@@ -28,6 +29,11 @@ public class Level extends Location {
     public Level(int id, String name) {
         super(id, name);
         this.roomsOnLevel = new ArrayList<Room>();
+    }
+
+    public Level() {
+        super(0, "");
+        this.roomsOnLevel = new ArrayList<>();
     }
 
     /**

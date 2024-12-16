@@ -1,9 +1,12 @@
 package pl.put.poznan.buildingInfo.rest;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -12,8 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import pl.put.poznan.buildingInfo.logic.locations.Building;
-import pl.put.poznan.buildingInfo.logic.locations.Level;
-import pl.put.poznan.buildingInfo.logic.locations.Room;
 import pl.put.poznan.buildingInfo.logic.visitors.AreaVisitor;
 import pl.put.poznan.buildingInfo.logic.visitors.CubeVisitor;
 import pl.put.poznan.buildingInfo.logic.visitors.EnergyVisitor;
@@ -42,23 +43,27 @@ public class BuildingController {
      */
     @PostConstruct
     public void init() {
-        Room room1 = new Room(1001, "1A", 50.5, 120.0, 10.5, 20.0);
-        Room room2 = new Room(1002, "1B", 60.0, 150.0, 15.0, 30.0);
-        Level level1 = new Level(101, "Level 1");
-        level1.add(room1);
-        level1.add(room2);
+        ObjectMapper objectMapper = new ObjectMapper();
+        List<Building> buildingsFromFile;
 
-        Room room3 = new Room(2001, "2A", 70.0, 200.0, 20.0, 40.0);
-        Level level2 = new Level(102, "Level 2");
-        level2.add(room3);
+        try {
+            ClassLoader classLoader = getClass().getClassLoader();
+            InputStream inputStream = classLoader.getResourceAsStream("buildings.json");
 
-        Building building = new Building(1, "Building A");
-        building.add(level1);
-        building.add(level2);
+            if (inputStream == null) {
+                throw new IllegalArgumentException("File not found: buildings.json");
+            }
 
-        buildings.add(building);
+            buildingsFromFile = objectMapper.readValue(inputStream, new TypeReference<List<Building>>() {});
 
-        logger.info("Initialized buildings data with {} buildings.", buildings.size());
+            for (Building building : buildingsFromFile) {
+                buildings.add(building);
+                logger.info("Added building: {} with {} levels.", building.getId(), building.getLevelsInBuilding().size());
+            }
+            logger.info("Successfully loaded {} buildings from JSON.", buildings.size());
+        } catch (Exception e) {
+            logger.error("Failed to load buildings data from JSON", e);
+        }
     }
 
     /**

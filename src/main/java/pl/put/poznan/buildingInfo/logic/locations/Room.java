@@ -1,5 +1,6 @@
 package pl.put.poznan.buildingInfo.logic.locations;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import pl.put.poznan.buildingInfo.logic.visitors.Visitor;
 
 /**
@@ -44,6 +45,10 @@ public class Room extends Location {
         this.cube = cube;
         this.heating = heating;
         this.light = light;
+    }
+
+    public Room() {
+        super(0, "");
     }
 
     /**
