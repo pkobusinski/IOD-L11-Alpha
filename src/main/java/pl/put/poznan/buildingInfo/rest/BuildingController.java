@@ -15,10 +15,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import pl.put.poznan.buildingInfo.logic.locations.Building;
-import pl.put.poznan.buildingInfo.logic.visitors.AreaVisitor;
-import pl.put.poznan.buildingInfo.logic.visitors.CubeVisitor;
-import pl.put.poznan.buildingInfo.logic.visitors.EnergyVisitor;
-import pl.put.poznan.buildingInfo.logic.visitors.LightVisitor;
+import pl.put.poznan.buildingInfo.logic.locations.Room;
+import pl.put.poznan.buildingInfo.logic.visitors.*;
 
 import javax.annotation.PostConstruct;
 
@@ -31,7 +29,11 @@ import javax.annotation.PostConstruct;
 @RequestMapping("/buildings")
 public class BuildingController {
 
-    private static final Logger logger = LoggerFactory.getLogger(BuildingController.class);
+    /**
+     * Logger odpowiedzialny za rejestrowanie informacji i ostrzeżeń
+     * w operacjach związanych z kontrolerem budynków.
+     **/
+     private static final Logger logger = LoggerFactory.getLogger(BuildingController.class);
 
     /**
      * Lista wszystkich budynków zarządzanych przez kontroler.
@@ -62,7 +64,7 @@ public class BuildingController {
             }
             logger.info("Successfully loaded {} buildings from JSON.", buildings.size());
         } catch (Exception e) {
-            logger.error("Failed to load buildings data from JSON", e);
+            logger.debug("Failed to load buildings data from JSON", e);
         }
     }
 
@@ -86,7 +88,7 @@ public class BuildingController {
      */
     @RequestMapping(value = "/{buildingId}", method = RequestMethod.GET, produces = "application/json")
     public Building getBuilding(@PathVariable int buildingId) {
-        logger.debug("Building with ID: {}", buildingId);
+        logger.info("Building with ID: {}", buildingId);
         return buildings.stream().filter(b -> b.getId() == buildingId).findFirst()
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Building with ID: " + buildingId + " not found"));
     }
@@ -148,7 +150,7 @@ public class BuildingController {
      * @throws ResponseStatusException jeśli budynek o podanym identyfikatorze nie istnieje
      */
     @RequestMapping(value = "/{buildingId}/area", method = RequestMethod.GET, produces = "application/json")
-    public ResponseEntity<Map<String, Object>> calculateAreaOfBuilding(@PathVariable int buildingId) {
+    public ResponseEntity<Map<String, Object>> getAreaOfBuilding(@PathVariable int buildingId) {
         Building building = getBuilding(buildingId);
         AreaVisitor areaVisitor = new AreaVisitor();
         logger.debug("Calculating total area for building ID: {}", buildingId);
@@ -169,7 +171,7 @@ public class BuildingController {
      * @throws ResponseStatusException jeśli budynek o podanym identyfikatorze nie istnieje
      */
     @RequestMapping(value = "/{buildingId}/cube", method = RequestMethod.GET, produces = "application/json")
-    public ResponseEntity<Map<String, Object>> calculateCubeOfBuilding(@PathVariable int buildingId) {
+    public ResponseEntity<Map<String, Object>> getCubeOfBuilding(@PathVariable int buildingId) {
         Building building = getBuilding(buildingId);
         CubeVisitor cubeVisitor = new CubeVisitor();
         logger.debug("Calculating total cube for building ID: {}", buildingId);
@@ -190,7 +192,7 @@ public class BuildingController {
      * @throws ResponseStatusException jeśli budynek o podanym identyfikatorze nie istnieje
      */
     @RequestMapping(value = "/{buildingId}/light", method = RequestMethod.GET, produces = "application/json")
-    public ResponseEntity<Map<String, Object>> calculateLightPowerOfBuilding(@PathVariable int buildingId) {
+    public ResponseEntity<Map<String, Object>> getLightPowerOfBuilding(@PathVariable int buildingId) {
         Building building = getBuilding(buildingId);
         LightVisitor lightVisitor = new LightVisitor();
         logger.debug("Calculating total light power for building ID: {}", buildingId);
@@ -211,7 +213,7 @@ public class BuildingController {
      * @throws ResponseStatusException jeśli budynek o podanym identyfikatorze nie istnieje
      */
     @RequestMapping(value = "/{buildingId}/energy", method = RequestMethod.GET, produces = "application/json")
-    public ResponseEntity<Map<String, Object>> calculateEnergyConsumption(@PathVariable int buildingId) {
+    public ResponseEntity<Map<String, Object>> getEnergyConsumption(@PathVariable int buildingId) {
         Building building = getBuilding(buildingId);
         EnergyVisitor energyVisitor = new EnergyVisitor();
         logger.debug("Calculating total energy consumption for building ID: {}", buildingId);
@@ -221,6 +223,31 @@ public class BuildingController {
 
         Map<String, Object> response = new HashMap<>();
         response.put("energy consumption:", energy);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    /**
+     * Oblicza zużycie energii cieplnej na m³ dla każdego pomieszczenia w budynku i zwraca te,
+     * które przekraczają zadany limit.
+     *
+     * @param buildingId ID budynku.
+     * @param energyLimit Wartość graniczna zużycia energii cieplnej na m³.
+     * @return Mapa z informacjami o pomieszczeniach przekraczających limit.
+     * @throws ResponseStatusException jeśli budynek o podanym identyfikatorze nie istnieje
+     */
+    @RequestMapping(value = "/{buildingId}/exceeding-heating", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<Map<String, Object>> getRoomsExceedingHeating(@PathVariable int buildingId, @RequestParam double energyLimit) {
+        Building building = getBuilding(buildingId);
+        logger.debug("Checking rooms exceeding energy limit for building ID: {}", buildingId);
+        ExceedingHeatingVisitor visitor = new ExceedingHeatingVisitor(energyLimit);
+
+        building.accept(visitor);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("exceedingRooms", visitor.getRoomsExceedingLimit());
+
+        logger.info("Found {} rooms exceeding energy limit in building ID: {}", visitor.getRoomsExceedingLimit().size(), buildingId);
+
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 

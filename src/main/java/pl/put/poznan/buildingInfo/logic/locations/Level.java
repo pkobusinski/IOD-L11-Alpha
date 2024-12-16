@@ -3,7 +3,6 @@ package pl.put.poznan.buildingInfo.logic.locations;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import pl.put.poznan.buildingInfo.logic.visitors.Visitor;
 /**
  * Klasa reprezentujaca poziom (pietro) w hierarchii lokalizacji.

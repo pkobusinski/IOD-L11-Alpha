@@ -1,6 +1,5 @@
 package pl.put.poznan.buildingInfo.logic.locations;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import pl.put.poznan.buildingInfo.logic.visitors.Visitor;
 
 /**

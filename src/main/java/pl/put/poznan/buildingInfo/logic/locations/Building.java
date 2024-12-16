@@ -1,8 +1,6 @@
 package pl.put.poznan.buildingInfo.logic.locations;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import pl.put.poznan.buildingInfo.logic.visitors.Visitor;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +9,7 @@ import java.util.List;
  *
  * Budynek moze sie skladac z wielu pieter, ktore sa reprezentacjami
  * klasy Level.
- * Klasa pozwala na zarzadzenie lokalizacjami podrzednimi poprzez
+ * Klasa pozwala na zarzadzenie lokalizacjami podrzednymi poprzez
  * dodawanie i usuwanie.
  * Klasa pozwala na obliczanie powierzchni, kubatury, zuzycia energii i ciepla
  * poprzez zsumowanie tych jednostek z obiektow podrzednych.
