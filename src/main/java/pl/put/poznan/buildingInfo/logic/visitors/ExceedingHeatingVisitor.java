@@ -7,12 +7,24 @@ import pl.put.poznan.buildingInfo.logic.locations.Room;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Klasa wyszukujaca pomieszczenia, ktore przekraczaja zadany limit zuzycia energii.
+ * 
+ * Implementacja wzorca odwiedzajacego (Visitor), dodatkowo korzysta z klasy {@link EnergyVisitor}
+ * do obliczenia zuzycia energii dla pomieszczen.
+ * 
+ */
 public class ExceedingHeatingVisitor implements Visitor {
 
     private double energyLimit;
     private List<Room> roomsExceedingHeating = new ArrayList<>();
     private EnergyVisitor energyVisitor = new EnergyVisitor();
 
+    /**
+     * Tworzy instancje odwiedzajacego z okreslonym limitem zuzycia energii.
+     *
+     * @param energyLimit limit zuzycia energii
+     */
     public ExceedingHeatingVisitor(double energyLimit) {
         this.energyLimit = energyLimit;
     }
@@ -45,9 +57,9 @@ public class ExceedingHeatingVisitor implements Visitor {
     }
 
     /**
-     * Zwraca listę pomieszczeń przekraczających limit.
+     * Zwraca liste pomieszczen przekraczajacych limit zuzycia energii.
      *
-     * @return Lista pomieszczeń.
+     * @return lista pomieszczen przekraczajacych limit
      */
     public List<Room> getRoomsExceedingLimit() {
         return roomsExceedingHeating;

@@ -46,6 +46,9 @@ public class Room extends Location {
         this.light = light;
     }
 
+    /**
+     * Pusty konstruktor klasy Room.
+     */
     public Room() {
         super(0, "");
     }
@@ -85,18 +88,34 @@ public class Room extends Location {
         return cube;
     }
 
+    /**
+     * Zwraca ogrzewanie pomieszczenia
+     * @return
+     */
     public double getHeating() {
         return heating;
     }
 
+    /**
+     * Ustawia ogrzewanie pomieszczenia
+     * @return
+     */
     public void setHeating(double heating) {
         this.heating = heating;
     }
 
+    /**
+     * Zwraca oświetlenie pomieszczenia
+     * @return
+     */
     public double getLight() {
         return light;
     }
 
+    /**
+     * Ustawia oświetlenie pomieszczenia
+     * @return
+     */
     public void setLight(double light) {
         this.light = light;
     }
@@ -134,6 +153,11 @@ public class Room extends Location {
         this.cube = cube;
     }
 
+    /**
+     * Funkcja pozwala na zaakceptowanie wizytatora odwiedzającego klas
+     * podlokacji w budynku.
+     * @param visitor objekt wizytatora
+     */
     @Override
     public double accept(Visitor visitor) {
         return visitor.visit(this);

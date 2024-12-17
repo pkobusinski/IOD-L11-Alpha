@@ -29,7 +29,11 @@ public class Level extends Location {
         super(id, name);
         this.roomsOnLevel = new ArrayList<Room>();
     }
-
+    
+    /**
+     * Konstruktor klasy Level.
+     *
+     */
     public Level() {
         super(0, "");
         this.roomsOnLevel = new ArrayList<>();
@@ -109,6 +113,11 @@ public class Level extends Location {
         this.roomsOnLevel = roomsOnLevel;
     }
 
+    /**
+     * Funkcja pozwala na zaakceptowanie wizytatora odwiedzającego klas
+     * podlokacji w budynku.
+     * @param visitor objekt wizytatora
+     */
     @Override
     public double accept(Visitor visitor) {
         return visitor.visit(this);
