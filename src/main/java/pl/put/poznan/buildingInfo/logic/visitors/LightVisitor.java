@@ -4,6 +4,13 @@ import pl.put.poznan.buildingInfo.logic.locations.Building;
 import pl.put.poznan.buildingInfo.logic.locations.Level;
 import pl.put.poznan.buildingInfo.logic.locations.Room;
 
+/**
+ * Klasa obliczajaca stosunek mocy oswietlenia do powierzchni pomieszczen, poziomow i budynkow.
+ * 
+ * Implementacja wzorca odwiedzajacego (Visitor), ktora pozwala na rekurencyjne 
+ * sumowanie wspolczynnika oswietlenia dla calej struktury budynku.
+ * 
+ */
 public class LightVisitor implements Visitor {
     @Override
     public double visit(Room room) {

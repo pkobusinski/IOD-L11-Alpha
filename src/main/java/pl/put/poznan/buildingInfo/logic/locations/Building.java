@@ -28,6 +28,9 @@ public class Building extends Location {
         this.levelsInBuilding = new ArrayList<Level>();
     }
 
+    /**
+     * Konstruktor klasy Building
+     */
     public Building() {
         super(0, "");
         this.levelsInBuilding = new ArrayList<>();
@@ -101,7 +104,11 @@ public class Building extends Location {
         this.levelsInBuilding = levelsInBuilding;
     }
 
-
+/**
+     * Funkcja pozwala na zaakceptowanie wizytatora odwiedzającego klas
+     * podlokacji w budynku.
+     * @param visitor objekt wizytatora
+     */
     @Override
     public double accept(Visitor visitor) {
         return visitor.visit(this);

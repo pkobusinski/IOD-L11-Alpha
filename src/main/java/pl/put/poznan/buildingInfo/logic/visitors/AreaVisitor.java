@@ -4,8 +4,14 @@ import pl.put.poznan.buildingInfo.logic.locations.Building;
 import pl.put.poznan.buildingInfo.logic.locations.Level;
 import pl.put.poznan.buildingInfo.logic.locations.Room;
 
+/**
+ * Klasa obliczajaca laczna powierzchnie dla pomieszczen, poziomow i budynkow.
+ * 
+ * Implementacja wzorca odwiedzajacego (Visitor), pozwalajaca na rekurencyjne 
+ * sumowanie powierzchni dla calej struktury budynku.
+ * 
+ */
 public class AreaVisitor implements Visitor {
-
 
     @Override
     public double visit(Room room) {
@@ -30,3 +36,4 @@ public class AreaVisitor implements Visitor {
         return area;
     }
 }
+
