@@ -1,17 +1,17 @@
 # IOD-L11-Alpha
 
 ## Członkowie zespołu: 
-- Filip Domański 151575
-- Aleksander Kamiński 155840
+- Filip Domanski 151575
+- Aleksander Kaminski 155840
 - Wojciech Kasprzak 155824
-- Piotr Kobusiński 155182
+- Piotr Kobusinski 155182
 
 ## Opis projektu: 
-Dla administratorów budynków, którzy pragną optymalizować koszty zarządzania budynkami nasza aplikacja Building Info umożliwi pozyskanie informacji o parametrach budynku na poziomie pomieszczeń, kondygnacji oraz całych budynków. Aplikacja będzie dostępna poprzez GUI a także jako zdalne API dzięki czemu można ją zintegrować z istniejącymi narzędziami.
+Dla administratorów budynków, którzy pragną optymalizowac koszty zarządzania budynkami nasza aplikacja Building Info umożliwi pozyskanie informacji o parametrach budynku na poziomie pomieszczen, kondygnacji oraz całych budynków. Aplikacja będzie dostępna poprzez GUI a także jako zdalne API dzięki czemu można ją zintegrowac z istniejącymi narzędziami.
 
 ## Struktura danych: 
 -  Lokacja to budynek, poziom, lub pomieszczenie
-- Budynek może składać się z poziomów a te z pomieszczeń
+- Budynek może składac się z poziomów a te z pomieszczen
 - Każda lokalizacja jest charakteryzowana przez:
     - id – unikalny identyfikator
     - name – opcjonalna nazwa lokalizacji

@@ -89,7 +89,7 @@ public class Level extends Location {
 
     /**
      * Setter nazwy poziomu.
-     * @param name
+     * @param name nazwa
      */
     public void setName(String name) {
         this.name = name;
@@ -114,7 +114,7 @@ public class Level extends Location {
     }
 
     /**
-     * Funkcja pozwala na zaakceptowanie wizytatora odwiedzającego klas
+     * Funkcja pozwala na zaakceptowanie wizytatora odwiedzajacego klas
      * podlokacji w budynku.
      * @param visitor objekt wizytatora
      */

@@ -3,7 +3,7 @@ package pl.put.poznan.buildingInfo.logic.locations;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Klasa abstrakcyjna, która reprezentuje lokalizacje, ktora moze byc budynkiem,
+ * Klasa abstrakcyjna, ktora reprezentuje lokalizacje, ktora moze byc budynkiem,
  * poziomem lub pokojem.
  *
  * Sluzy jako baza do implementacji roznych typow lokalizacji.
@@ -22,8 +22,8 @@ public abstract class Location implements Visitable {
 
     /**
      * Konstruktor klasy Location.
-     * @param id
-     * @param name
+     * @param id unikalne id
+     * @param name nazwa
      */
     public Location(int id, String name) {
         this.id = id;
@@ -35,6 +35,8 @@ public abstract class Location implements Visitable {
      * Metoda abstrakcyjna, ktora posiada implementacje
      * w konkretnej klasie dziedziczacej.
      * Sluzy do zarzadzania struktura hierarchiczna.
+     *
+     * @param location lokalizacja
      */
     public abstract void add(Location location);
 
@@ -44,6 +46,7 @@ public abstract class Location implements Visitable {
      * Metoda abstrakcyjna, ktora posiada implementacje
      * w konkretnej klasie dziedziczacej.
      * Sluzy do zarzadzania struktura hierarchiczna.
+     * @param location lokacja
      */
     public abstract void remove(Location location);
 

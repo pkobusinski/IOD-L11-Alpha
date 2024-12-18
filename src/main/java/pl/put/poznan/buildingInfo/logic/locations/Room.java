@@ -31,12 +31,12 @@ public class Room extends Location {
 
     /**
      * Konstruktor klasy Room.
-     * @param id
-     * @param name
-     * @param area
-     * @param cube
-     * @param heating
-     * @param light
+     * @param id id
+     * @param name nazwa
+     * @param area powierzchnia
+     * @param cube kubatura
+     * @param heating ogrzewanie
+     * @param light swiatlo
      */
     public Room(int id, String name, double area, double cube, double heating, double light) {
         super(id, name);
@@ -55,7 +55,7 @@ public class Room extends Location {
 
     /**
      * Pokoj nie pozwala na podanie lokacji podrzednych.
-     * @param location
+     * @param location lokacja
      * @throws UnsupportedOperationException Pokoj nie posiada lokacji podrzednych.
      */
     @Override
@@ -65,7 +65,7 @@ public class Room extends Location {
 
     /**
      * Pokoj nie posiada lokacji podrzednych.
-     * @param location
+     * @param location lokacja
      * @throws UnsupportedOperationException Pokoj nie posiada lokacji podrzednych.
      */
     @Override
@@ -75,14 +75,14 @@ public class Room extends Location {
 
     /**
      * Zwraca powierzchnie pokoju.
-     * @return
+     * @return powierzchnia
      */
     public double getArea() {
         return area;
     }
     /**
      * Zwraca kubature pomieszczenia
-     * @return
+     * @return kubatura
      */
     public double getCube() {
         return cube;
@@ -90,7 +90,7 @@ public class Room extends Location {
 
     /**
      * Zwraca ogrzewanie pomieszczenia
-     * @return
+     * @return ogrzewanie
      */
     public double getHeating() {
         return heating;
@@ -98,23 +98,23 @@ public class Room extends Location {
 
     /**
      * Ustawia ogrzewanie pomieszczenia
-     * @return
+     * @param heating ogrzewanie
      */
     public void setHeating(double heating) {
         this.heating = heating;
     }
 
     /**
-     * Zwraca oświetlenie pomieszczenia
-     * @return
+     * Zwraca oswietlenie pomieszczenia
+     * @return oswietlenie
      */
     public double getLight() {
         return light;
     }
 
     /**
-     * Ustawia oświetlenie pomieszczenia
-     * @return
+     * Ustawia oswietlenie pomieszczenia
+     * @param light oswietlenie
      */
     public void setLight(double light) {
         this.light = light;
@@ -135,26 +135,26 @@ public class Room extends Location {
 
     /**
      * Pozwala na ustawienie nazwy pokoju.
-     * @param name
+     * @param name nazwa
      */
     public void setName(String name) {this.name = name;}
 
     /**
      * Pozwala na ustawienie powierzchni pokoju.
-     * @param area
+     * @param area powierzchnia
      */
     public void setArea(double area) {this.area = area;}
 
     /**
      * Pozwala na ustawienie kubatury pokoju.
-     * @param cube
+     * @param cube kubatura
      */
     public void setCube(double cube) {
         this.cube = cube;
     }
 
     /**
-     * Funkcja pozwala na zaakceptowanie wizytatora odwiedzającego klas
+     * Funkcja pozwala na zaakceptowanie wizytatora odwiedzajacego klas
      * podlokacji w budynku.
      * @param visitor objekt wizytatora
      */

@@ -4,10 +4,11 @@ import pl.put.poznan.buildingInfo.logic.visitors.Visitor;
 
 public interface Visitable {
     /**
-     * Funkcja pozwala na zaakceptowanie wizytatora odwiedzającego klas
+     * Funkcja pozwala na zaakceptowanie wizytatora odwiedzajacego klas
      * podlokacji w budynku.
-     * Konkretna implementacja interface'u jest dostępna w klasach go używającego.
-     * @param visitor objekt wizytatora
+     * Konkretna implementacja interface'u jest dostepna w klasach go uzywajacego.
+     * @param visitor obiekt wizytatora
+     * @return liczbe double
      */
     double accept(Visitor visitor);
 }

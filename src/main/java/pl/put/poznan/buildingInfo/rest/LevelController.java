@@ -25,14 +25,14 @@ import pl.put.poznan.buildingInfo.logic.visitors.EnergyVisitor;
 import pl.put.poznan.buildingInfo.logic.visitors.LightVisitor;
 
 /**
- * Kontroler obsługujący operacje CRUD dla poziomów ({@link Level}) w ramach budynków ({@link Building}).
+ * Kontroler obslugujący operacje CRUD dla poziomow ({@link Level}) w ramach budynkow ({@link Building}).
  *
- * Umożliwia zarządzanie poziomami w budynkach, w tym ich dodawanie, usuwanie i pobieranie,
- * a także wykonywanie obliczeń takich jak sumaryczna powierzchnia, kubatura,
- * moc oświetlenia oraz zużycie energii na poziomach.
+ * Umozliwia zarządzanie poziomami w budynkach, w tym ich dodawanie, usuwanie i pobieranie,
+ * a takze wykonywanie obliczen takich jak sumaryczna powierzchnia, kubatura,
+ * moc oświetlenia oraz zuzycie energii na poziomach.
  *
- * Wszystkie operacje są wykonywane w kontekście konkretnego budynku, którego identyfikator
- * jest przekazywany jako część ścieżki API.
+ * Wszystkie operacje są wykonywane w kontekście konkretnego budynku, ktorego identyfikator
+ * jest przekazywany jako cześc ściezki API.
  */
 
 @RestController
@@ -53,8 +53,8 @@ public class LevelController {
     /**
      * Pobiera wszystkie poziomy (levels) dla konkretnego budynku.
      *
-     * @param buildingId identyfikator budynku, którego poziomy mają zostać pobrane
-     * @return lista wszystkich poziomów w danym budynku
+     * @param buildingId identyfikator budynku, ktorego poziomy mają zostac pobrane
+     * @return lista wszystkich poziomow w danym budynku
      * @throws ResponseStatusException jeśli budynek o podanym identyfikatorze nie istnieje
      */
     @RequestMapping(value = "/all-levels", method = RequestMethod.GET, produces = "application/json")
@@ -83,9 +83,9 @@ public class LevelController {
      * Dodaje nowy poziom do wskazanego budynku.
      *
      * @param level obiekt poziomu do dodania
-     * @param buildingId identyfikator budynku, do którego poziom ma zostać dodany
+     * @param buildingId identyfikator budynku, do ktorego poziom ma zostac dodany
      * @return dodany poziom
-     * @throws ResponseStatusException jeśli poziom o podanym identyfikatorze już istnieje w budynku
+     * @throws ResponseStatusException jeśli poziom o podanym identyfikatorze juz istnieje w budynku
      */
     @RequestMapping(method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     public Level addLevel(@RequestBody Level level, @PathVariable int buildingId) {
@@ -144,11 +144,11 @@ public class LevelController {
 
 
     /**
-     * Pobiera szczegóły konkretnego poziomu na podstawie jego identyfikatora i identyfikatora budynku.
+     * Pobiera szczegoly konkretnego poziomu na podstawie jego identyfikatora i identyfikatora budynku.
      *
-     * @param buildingId identyfikator budynku, w którym znajduje się poziom
+     * @param buildingId identyfikator budynku, w ktorym znajduje sie poziom
      * @param levelId identyfikator poziomu do pobrania
-     * @return szczegóły poziomu
+     * @return szczegoly poziomu
      * @throws ResponseStatusException jeśli poziom o podanym identyfikatorze nie istnieje w budynku
      */
     @RequestMapping(value = "/{levelId}", method = RequestMethod.GET, produces = "application/json")
@@ -169,11 +169,11 @@ public class LevelController {
 
 
     /**
-     * Oblicza całkowitą powierzchnię dla konkretnego poziomu w danym budynku.
+     * Oblicza calkowitą powierzchnie dla konkretnego poziomu w danym budynku.
      *
-     * @param buildingId identyfikator budynku, w którym znajduje się poziom
-     * @param levelId identyfikator poziomu, dla którego powierzchnia ma zostać obliczona
-     * @return całkowita powierzchnia poziomu w metrach kwadratowych
+     * @param buildingId identyfikator budynku, w ktorym znajduje sie poziom
+     * @param levelId identyfikator poziomu, dla ktorego powierzchnia ma zostac obliczona
+     * @return calkowita powierzchnia poziomu w metrach kwadratowych
      * @throws ResponseStatusException jeśli poziom o podanym identyfikatorze nie istnieje
      */
     @RequestMapping(value="/{levelId}/area", method = RequestMethod.GET, produces="application/json")
@@ -193,11 +193,11 @@ public class LevelController {
     }
 
     /**
-     * Oblicza całkowitą kubaturę dla konkretnego poziomu w danym budynku.
+     * Oblicza calkowitą kubature dla konkretnego poziomu w danym budynku.
      *
-     * @param buildingId identyfikator budynku, w którym znajduje się poziom
-     * @param levelId identyfikator poziomu, dla którego kubatura ma zostać obliczona
-     * @return całkowita kubatura poziomu w metrach sześciennych
+     * @param buildingId identyfikator budynku, w ktorym znajduje sie poziom
+     * @param levelId identyfikator poziomu, dla ktorego kubatura ma zostac obliczona
+     * @return calkowita kubatura poziomu w metrach sześciennych
      * @throws ResponseStatusException jeśli poziom o podanym identyfikatorze nie istnieje
      */
     @RequestMapping(value="/{levelId}/cube", method = RequestMethod.GET, produces="application/json")
@@ -217,11 +217,11 @@ public class LevelController {
     }
 
     /**
-     * Oblicza całkowitą moc oświetlenia dla konkretnego poziomu w danym budynku.
+     * Oblicza calkowitą moc oświetlenia dla konkretnego poziomu w danym budynku.
      *
-     * @param buildingId identyfikator budynku, w którym znajduje się poziom
-     * @param levelId identyfikator poziomu, dla którego moc oświetlenia ma zostać obliczona
-     * @return całkowita moc oświetlenia poziomu w watach
+     * @param buildingId identyfikator budynku, w ktorym znajduje sie poziom
+     * @param levelId identyfikator poziomu, dla ktorego moc oświetlenia ma zostac obliczona
+     * @return calkowita moc oświetlenia poziomu w watach
      * @throws ResponseStatusException jeśli poziom o podanym identyfikatorze nie istnieje
      */
     @RequestMapping(value="/{levelId}/light-power", method = RequestMethod.GET, produces="application/json")
@@ -243,11 +243,11 @@ public class LevelController {
     }
 
     /**
-     * Oblicza całkowite zużycie energii na ogrzewanie dla konkretnego poziomu w danym budynku.
+     * Oblicza calkowite zuzycie energii na ogrzewanie dla konkretnego poziomu w danym budynku.
      *
-     * @param buildingId identyfikator budynku, w którym znajduje się poziom
-     * @param levelId identyfikator poziomu, dla którego zużycie energii ma zostać obliczone
-     * @return całkowite zużycie energii poziomu w kilowatogodzinach
+     * @param buildingId identyfikator budynku, w ktorym znajduje sie poziom
+     * @param levelId identyfikator poziomu, dla ktorego zuzycie energii ma zostac obliczone
+     * @return calkowite zuzycie energii poziomu w kilowatogodzinach
      * @throws ResponseStatusException jeśli poziom o podanym identyfikatorze nie istnieje
      */
     @RequestMapping(value="/{levelId}/energy-consumption", method = RequestMethod.GET, produces="application/json")

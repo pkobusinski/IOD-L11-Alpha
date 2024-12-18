@@ -21,27 +21,27 @@ import pl.put.poznan.buildingInfo.logic.visitors.*;
 import javax.annotation.PostConstruct;
 
 /**
- * Kontroler obsługujący operacje CRUD dla budynków oraz dodatkowe obliczenia związane z ich właściwościami.
- * Umożliwia zarządzanie budynkami, w tym dodawanie, aktualizowanie i usuwanie,
- * a także obliczanie sumarycznej powierzchni, kubatury, mocy oświetlenia i zużycia energii.
+ * Kontroler obslugujący operacje CRUD dla budynkow oraz dodatkowe obliczenia związane z ich wlaściwościami.
+ * Umozliwia zarządzanie budynkami, w tym dodawanie, aktualizowanie i usuwanie,
+ * a takze obliczanie sumarycznej powierzchni, kubatury, mocy oświetlenia i zuzycia energii.
  */
 @RestController
 @RequestMapping("/buildings")
 public class BuildingController {
 
     /**
-     * Logger odpowiedzialny za rejestrowanie informacji i ostrzeżeń
-     * w operacjach związanych z kontrolerem budynków.
+     * Logger odpowiedzialny za rejestrowanie informacji i ostrzezen
+     * w operacjach związanych z kontrolerem budynkow.
      **/
      private static final Logger logger = LoggerFactory.getLogger(BuildingController.class);
 
     /**
-     * Lista wszystkich budynków zarządzanych przez kontroler.
+     * Lista wszystkich budynkow zarządzanych przez kontroler.
      */
     public List<Building> buildings = new ArrayList<Building>();
 
     /**
-     * Inicjalizuje przykładowe dane dotyczące budynków po uruchomieniu aplikacji.
+     * Inicjalizuje przykladowe dane dotyczące budynkow po uruchomieniu aplikacji.
      */
     @PostConstruct
     public void init() {
@@ -69,9 +69,9 @@ public class BuildingController {
     }
 
     /**
-     * Pobiera listę wszystkich budynków.
+     * Pobiera liste wszystkich budynkow.
      *
-     * @return lista wszystkich budynków
+     * @return lista wszystkich budynkow
      */
     @GetMapping("/all-buildings")
     public List<Building> getAllBuildings() {
@@ -80,10 +80,10 @@ public class BuildingController {
     }
 
     /**
-     * Pobiera szczegóły konkretnego budynku na podstawie jego identyfikatora.
+     * Pobiera szczegoly konkretnego budynku na podstawie jego identyfikatora.
      *
      * @param buildingId identyfikator budynku
-     * @return szczegóły budynku
+     * @return szczegoly budynku
      * @throws ResponseStatusException jeśli budynek o podanym identyfikatorze nie istnieje
      */
     @RequestMapping(value = "/{buildingId}", method = RequestMethod.GET, produces = "application/json")
@@ -98,7 +98,7 @@ public class BuildingController {
      *
      * @param building obiekt budynku do dodania
      * @return dodany budynek
-     * @throws ResponseStatusException jeśli budynek o podanym identyfikatorze już istnieje
+     * @throws ResponseStatusException jeśli budynek o podanym identyfikatorze juz istnieje
      */
     @RequestMapping(method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     public Building addBuilding(@RequestBody Building building) {
@@ -143,10 +143,10 @@ public class BuildingController {
     }
 
     /**
-     * Oblicza łączną powierzchnię budynku i zwraca ją w formacie JSON.
+     * Oblicza lączną powierzchnie budynku i zwraca ją w formacie JSON.
      *
-     * @param buildingId identyfikator budynku, dla którego ma zostać obliczona powierzchnia
-     * @return ResponseEntity zawierający wartość sumarycznej powierzchni budynku w formacie JSON
+     * @param buildingId identyfikator budynku, dla ktorego ma zostac obliczona powierzchnia
+     * @return ResponseEntity zawierający wartośc sumarycznej powierzchni budynku w formacie JSON
      * @throws ResponseStatusException jeśli budynek o podanym identyfikatorze nie istnieje
      */
     @RequestMapping(value = "/{buildingId}/area", method = RequestMethod.GET, produces = "application/json")
@@ -164,10 +164,10 @@ public class BuildingController {
     }
 
     /**
-     * Oblicza łączną kubaturę budynku i zwraca ją w formacie JSON.
+     * Oblicza lączną kubature budynku i zwraca ją w formacie JSON.
      *
-     * @param buildingId identyfikator budynku, dla którego ma zostać obliczona kubatura
-     * @return ResponseEntity zawierający wartość sumarycznej kubatury budynku w formacie JSON
+     * @param buildingId identyfikator budynku, dla ktorego ma zostac obliczona kubatura
+     * @return ResponseEntity zawierający wartośc sumarycznej kubatury budynku w formacie JSON
      * @throws ResponseStatusException jeśli budynek o podanym identyfikatorze nie istnieje
      */
     @RequestMapping(value = "/{buildingId}/cube", method = RequestMethod.GET, produces = "application/json")
@@ -185,10 +185,10 @@ public class BuildingController {
     }
 
     /**
-     * Oblicza łączną moc oświetlenia budynku i zwraca ją w formacie JSON.
+     * Oblicza lączną moc oświetlenia budynku i zwraca ją w formacie JSON.
      *
-     * @param buildingId identyfikator budynku, dla którego ma zostać obliczona moc oświetlenia.
-     * @return ResponseEntity zawierający wartość sumarycznej mocy oświetlenia budynku w formacie JSON
+     * @param buildingId identyfikator budynku, dla ktorego ma zostac obliczona moc oświetlenia.
+     * @return ResponseEntity zawierający wartośc sumarycznej mocy oświetlenia budynku w formacie JSON
      * @throws ResponseStatusException jeśli budynek o podanym identyfikatorze nie istnieje
      */
     @RequestMapping(value = "/{buildingId}/light-power", method = RequestMethod.GET, produces = "application/json")
@@ -206,10 +206,10 @@ public class BuildingController {
     }
 
     /**
-     * Oblicza łączne zużycie energii na ogrzewanie w budynku i zwraca je w formacie JSON.
+     * Oblicza lączne zuzycie energii na ogrzewanie w budynku i zwraca je w formacie JSON.
      *
-     * @param buildingId identyfikator budynku, dla którego ma zostać obliczone zużycie energii na ogrzewanie.
-     * @return ResponseEntity zawierający wartość sumarycznego zużycia energii na ogrzewanie w budynku w formacie JSON
+     * @param buildingId identyfikator budynku, dla ktorego ma zostac obliczone zuzycie energii na ogrzewanie.
+     * @return ResponseEntity zawierający wartośc sumarycznego zuzycia energii na ogrzewanie w budynku w formacie JSON
      * @throws ResponseStatusException jeśli budynek o podanym identyfikatorze nie istnieje
      */
     @RequestMapping(value = "/{buildingId}/energy-consumption", method = RequestMethod.GET, produces = "application/json")
@@ -227,11 +227,11 @@ public class BuildingController {
     }
 
     /**
-     * Oblicza zużycie energii cieplnej na m³ dla każdego pomieszczenia w budynku i zwraca te,
-     * które przekraczają zadany limit.
+     * Oblicza zuzycie energii cieplnej na m³ dla kazdego pomieszczenia w budynku i zwraca te,
+     * ktore przekraczają zadany limit.
      *
      * @param buildingId ID budynku.
-     * @param energyLimit Wartość graniczna zużycia energii cieplnej na m³.
+     * @param energyLimit Wartośc graniczna zuzycia energii cieplnej na m³.
      * @return Mapa z informacjami o pomieszczeniach przekraczających limit.
      * @throws ResponseStatusException jeśli budynek o podanym identyfikatorze nie istnieje
      */

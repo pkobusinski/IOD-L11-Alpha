@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Klasa, która reprezentuje budynek, najwyżej w hierarchii lokalizacji
+ * Klasa, ktora reprezentuje budynek, najwyzej w hierarchii lokalizacji
  *
  * Budynek moze sie skladac z wielu pieter, ktore sa reprezentacjami
  * klasy Level.
@@ -20,8 +20,8 @@ public class Building extends Location {
 
     /**
      * Konstruktor klasy Building
-     * @param id
-     * @param name
+     * @param id id
+     * @param name imie
      */
     public Building(int id, String name) {
         super(id, name);
@@ -38,7 +38,7 @@ public class Building extends Location {
 
     /**
      * Funkcja pozwala dodawac poziomy klasy Level do budynku.
-     * @param location
+     * @param location dodawana lokacja
      */
     @Override
     public void add(Location location) {
@@ -51,7 +51,7 @@ public class Building extends Location {
 
     /**
      * Funkcja pozwala usuwac poziomy klasy Level z budynku.
-     * @param location
+     * @param location usuwana lokacja
      */
     @Override
     public void remove(Location location) {
@@ -64,7 +64,7 @@ public class Building extends Location {
 
     /**
      * Getter identyfikatora.
-     * @return
+     * @return id
      */
     public int getId() {
         return this.id;
@@ -72,7 +72,7 @@ public class Building extends Location {
 
     /**
      * Getter nazwy budynku.
-     * @return
+     * @return nazwa
      */
     public String getName() {
         return this.name;
@@ -80,7 +80,7 @@ public class Building extends Location {
 
     /**
      * Setter nazwy budynku.
-     * @param name
+     * @param name nazwa
      */
     public void setName(String name) {
         this.name = name;
@@ -98,14 +98,14 @@ public class Building extends Location {
     /**
      * Funkcja pozwala na natychmiastowe zdefiniowanie calej listy
      * podlokacji w budynku.
-     * @param levelsInBuilding
+     * @param levelsInBuilding pełna lista poziomow w budynku
      */
     public void setLevelsInBuilding(List<Level> levelsInBuilding) {
         this.levelsInBuilding = levelsInBuilding;
     }
 
 /**
-     * Funkcja pozwala na zaakceptowanie wizytatora odwiedzającego klas
+     * Funkcja pozwala na zaakceptowanie wizytatora odwiedzajacego klas
      * podlokacji w budynku.
      * @param visitor objekt wizytatora
      */

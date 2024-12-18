@@ -28,11 +28,11 @@ import pl.put.poznan.buildingInfo.logic.visitors.LightVisitor;
 
 
 /**
- * Kontroler obsługujący operacje CRUD dla pomieszczeń ({@link Room}) w ramach poziomów ({@link Level}) i budynków ({@link Building}).
+ * Kontroler obslugujący operacje CRUD dla pomieszczen ({@link Room}) w ramach poziomow ({@link Level}) i budynkow ({@link Building}).
  *
- * Umożliwia zarządzanie pokojami, w tym ich dodawanie, aktualizowanie, usuwanie i pobieranie.
- * Dodatkowo oferuje metody do obliczania parametrów takich jak powierzchnia, kubatura,
- * moc oświetlenia oraz zużycie energii dla konkretnego pokoju.
+ * Umozliwia zarządzanie pokojami, w tym ich dodawanie, aktualizowanie, usuwanie i pobieranie.
+ * Dodatkowo oferuje metody do obliczania parametrow takich jak powierzchnia, kubatura,
+ * moc oświetlenia oraz zuzycie energii dla konkretnego pokoju.
  */
 @RestController
 @RequestMapping("/buildings/{buildingId}/{levelId}")
@@ -51,9 +51,9 @@ public class RoomController {
     /**
      * Pobiera wszystkie pomieszczenia na wskazanym poziomie w budynku.
      *
-     * @param buildingId identyfikator budynku, w którym znajduje się poziom
-     * @param levelId identyfikator poziomu, z którego mają zostać pobrane pomieszczenia
-     * @return lista pomieszczeń znajdujących się na poziomie
+     * @param buildingId identyfikator budynku, w ktorym znajduje sie poziom
+     * @param levelId identyfikator poziomu, z ktorego mają zostac pobrane pomieszczenia
+     * @return lista pomieszczen znajdujących sie na poziomie
      * @throws ResponseStatusException jeśli poziom o podanym identyfikatorze nie istnieje
      */
     @RequestMapping(value = "/all-rooms", method = RequestMethod.GET, produces = "application/json")
@@ -82,10 +82,10 @@ public class RoomController {
      * Dodaje nowe pomieszczenie do wskazanego poziomu w budynku.
      *
      * @param room obiekt pomieszczenia do dodania
-     * @param buildingId identyfikator budynku, w którym znajduje się poziom
-     * @param levelId identyfikator poziomu, do którego pomieszczenie ma zostać dodane
+     * @param buildingId identyfikator budynku, w ktorym znajduje sie poziom
+     * @param levelId identyfikator poziomu, do ktorego pomieszczenie ma zostac dodane
      * @return dodane pomieszczenie
-     * @throws ResponseStatusException jeśli pomieszczenie o podanym identyfikatorze już istnieje
+     * @throws ResponseStatusException jeśli pomieszczenie o podanym identyfikatorze juz istnieje
      */
     @RequestMapping(method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     public Room addRoom(@RequestBody Room room, @PathVariable int buildingId, @PathVariable int levelId) {
@@ -106,8 +106,8 @@ public class RoomController {
     /**
      * Aktualizuje dane istniejącego pomieszczenia.
      *
-     * @param buildingId identyfikator budynku, w którym znajduje się poziom
-     * @param levelId identyfikator poziomu, w którym znajduje się pomieszczenie
+     * @param buildingId identyfikator budynku, w ktorym znajduje sie poziom
+     * @param levelId identyfikator poziomu, w ktorym znajduje sie pomieszczenie
      * @param roomId identyfikator pomieszczenia do aktualizacji
      * @param updatedRoom zaktualizowane dane pomieszczenia
      * @return zaktualizowane pomieszczenie
@@ -134,9 +134,9 @@ public class RoomController {
     /**
      * Usuwa pomieszczenie na podstawie jego identyfikatora.
      *
-     * @param roomId identyfikator pomieszczenia do usunięcia
-     * @param buildingId identyfikator budynku, w którym znajduje się poziom
-     * @param levelId identyfikator poziomu, w którym znajduje się pomieszczenie
+     * @param roomId identyfikator pomieszczenia do usuniecia
+     * @param buildingId identyfikator budynku, w ktorym znajduje sie poziom
+     * @param levelId identyfikator poziomu, w ktorym znajduje sie pomieszczenie
      * @throws ResponseStatusException jeśli pomieszczenie o podanym identyfikatorze nie istnieje
      */
     @DeleteMapping("/{roomId}")
@@ -154,12 +154,12 @@ public class RoomController {
     }
 
     /**
-     * Pobiera szczegóły konkretnego pomieszczenia na podstawie jego identyfikatora.
+     * Pobiera szczegoly konkretnego pomieszczenia na podstawie jego identyfikatora.
      *
-     * @param buildingId identyfikator budynku, w którym znajduje się poziom
-     * @param levelId identyfikator poziomu, w którym znajduje się pomieszczenie
+     * @param buildingId identyfikator budynku, w ktorym znajduje sie poziom
+     * @param levelId identyfikator poziomu, w ktorym znajduje sie pomieszczenie
      * @param roomId identyfikator pomieszczenia
-     * @return szczegóły pomieszczenia
+     * @return szczegoly pomieszczenia
      * @throws ResponseStatusException jeśli pomieszczenie o podanym identyfikatorze nie istnieje
      */
     @RequestMapping(value = "/{roomId}", method = RequestMethod.GET, produces = "application/json")
@@ -179,10 +179,10 @@ public class RoomController {
     }
 
     /**
-     * Pobiera powierzchnię konkretnego pomieszczenia.
+     * Pobiera powierzchnie konkretnego pomieszczenia.
      *
-     * @param buildingId identyfikator budynku, w którym znajduje się poziom
-     * @param levelId identyfikator poziomu, w którym znajduje się pomieszczenie
+     * @param buildingId identyfikator budynku, w ktorym znajduje sie poziom
+     * @param levelId identyfikator poziomu, w ktorym znajduje sie pomieszczenie
      * @param roomId identyfikator pomieszczenia
      * @return powierzchnia pomieszczenia (w metrach kwadratowych)
      */
@@ -201,10 +201,10 @@ public class RoomController {
     }
 
     /**
-     * Pobiera kubaturę konkretnego pomieszczenia.
+     * Pobiera kubature konkretnego pomieszczenia.
      *
-     * @param buildingId identyfikator budynku, w którym znajduje się poziom
-     * @param levelId identyfikator poziomu, w którym znajduje się pomieszczenie
+     * @param buildingId identyfikator budynku, w ktorym znajduje sie poziom
+     * @param levelId identyfikator poziomu, w ktorym znajduje sie pomieszczenie
      * @param roomId identyfikator pomieszczenia
      * @return kubatura pomieszczenia (w metrach sześciennych)
      */
@@ -224,12 +224,12 @@ public class RoomController {
     }
 
     /**
-     * Oblicza całkowitą moc oświetlenia dla konkretnego pomieszczenia.
+     * Oblicza calkowitą moc oświetlenia dla konkretnego pomieszczenia.
      *
-     * @param buildingId identyfikator budynku, w którym znajduje się poziom
-     * @param levelId identyfikator poziomu, w którym znajduje się pomieszczenie
+     * @param buildingId identyfikator budynku, w ktorym znajduje sie poziom
+     * @param levelId identyfikator poziomu, w ktorym znajduje sie pomieszczenie
      * @param roomId identyfikator pomieszczenia
-     * @return całkowita moc oświetlenia pomieszczenia (w watach)
+     * @return calkowita moc oświetlenia pomieszczenia (w watach)
      */
     @RequestMapping(value="/{roomId}/light-power", method = RequestMethod.GET, produces="application/json")
     public ResponseEntity<Map<String, Object>> getLightPowerOfBuilding(@PathVariable int buildingId, @PathVariable int levelId, @PathVariable int roomId) {
@@ -246,12 +246,12 @@ public class RoomController {
     }
 
     /**
-     * Oblicza całkowite zużycie energii dla konkretnego pomieszczenia.
+     * Oblicza calkowite zuzycie energii dla konkretnego pomieszczenia.
      *
-     * @param buildingId identyfikator budynku, w którym znajduje się poziom
-     * @param levelId identyfikator poziomu, w którym znajduje się pomieszczenie
+     * @param buildingId identyfikator budynku, w ktorym znajduje sie poziom
+     * @param levelId identyfikator poziomu, w ktorym znajduje sie pomieszczenie
      * @param roomId identyfikator pomieszczenia
-     * @return całkowite zużycie energii pomieszczenia (w kilowatogodzinach)
+     * @return calkowite zuzycie energii pomieszczenia (w kilowatogodzinach)
      */
     @RequestMapping(value="/{roomId}/energy-consumption", method = RequestMethod.GET, produces="application/json")
     public ResponseEntity<Map<String, Object>> getEnergyConsumptionOfBuilding(@PathVariable int buildingId, @PathVariable int levelId, @PathVariable int roomId) {
