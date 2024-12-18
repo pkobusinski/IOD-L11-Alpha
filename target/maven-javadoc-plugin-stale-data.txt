@@ -1,0 +1,101 @@
+@options
+@packages
+@argfile
+-classpath
+'C:/Users/kaspr/.m2/repository/org/springframework/boot/spring-boot-starter-web/2.3.3.RELEASE/spring-boot-starter-web-2.3.3.RELEASE.jar;C:/Users/kaspr/.m2/repository/org/springframework/boot/spring-boot-starter/2.3.3.RELEASE/spring-boot-starter-2.3.3.RELEASE.jar;C:/Users/kaspr/.m2/repository/org/springframework/boot/spring-boot/2.3.3.RELEASE/spring-boot-2.3.3.RELEASE.jar;C:/Users/kaspr/.m2/repository/org/springframework/boot/spring-boot-autoconfigure/2.3.3.RELEASE/spring-boot-autoconfigure-2.3.3.RELEASE.jar;C:/Users/kaspr/.m2/repository/org/springframework/boot/spring-boot-starter-logging/2.3.3.RELEASE/spring-boot-starter-logging-2.3.3.RELEASE.jar;C:/Users/kaspr/.m2/repository/ch/qos/logback/logback-classic/1.2.3/logback-classic-1.2.3.jar;C:/Users/kaspr/.m2/repository/ch/qos/logback/logback-core/1.2.3/logback-core-1.2.3.jar;C:/Users/kaspr/.m2/repository/org/apache/logging/log4j/log4j-to-slf4j/2.13.3/log4j-to-slf4j-2.13.3.jar;C:/Users/kaspr/.m2/repository/org/apache/logging/log4j/log4j-api/2.13.3/log4j-api-2.13.3.jar;C:/Users/kaspr/.m2/repository/org/slf4j/jul-to-slf4j/1.7.30/jul-to-slf4j-1.7.30.jar;C:/Users/kaspr/.m2/repository/jakarta/annotation/jakarta.annotation-api/1.3.5/jakarta.annotation-api-1.3.5.jar;C:/Users/kaspr/.m2/repository/org/yaml/snakeyaml/1.26/snakeyaml-1.26.jar;C:/Users/kaspr/.m2/repository/org/springframework/boot/spring-boot-starter-json/2.3.3.RELEASE/spring-boot-starter-json-2.3.3.RELEASE.jar;C:/Users/kaspr/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.11.2/jackson-databind-2.11.2.jar;C:/Users/kaspr/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.11.2/jackson-annotations-2.11.2.jar;C:/Users/kaspr/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.11.2/jackson-core-2.11.2.jar;C:/Users/kaspr/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.11.2/jackson-datatype-jdk8-2.11.2.jar;C:/Users/kaspr/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.11.2/jackson-datatype-jsr310-2.11.2.jar;C:/Users/kaspr/.m2/repository/com/fasterxml/jackson/module/jackson-module-parameter-names/2.11.2/jackson-module-parameter-names-2.11.2.jar;C:/Users/kaspr/.m2/repository/org/springframework/boot/spring-boot-starter-tomcat/2.3.3.RELEASE/spring-boot-starter-tomcat-2.3.3.RELEASE.jar;C:/Users/kaspr/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/9.0.37/tomcat-embed-core-9.0.37.jar;C:/Users/kaspr/.m2/repository/org/glassfish/jakarta.el/3.0.3/jakarta.el-3.0.3.jar;C:/Users/kaspr/.m2/repository/org/apache/tomcat/embed/tomcat-embed-websocket/9.0.37/tomcat-embed-websocket-9.0.37.jar;C:/Users/kaspr/.m2/repository/org/springframework/spring-web/5.2.8.RELEASE/spring-web-5.2.8.RELEASE.jar;C:/Users/kaspr/.m2/repository/org/springframework/spring-beans/5.2.8.RELEASE/spring-beans-5.2.8.RELEASE.jar;C:/Users/kaspr/.m2/repository/org/springframework/spring-webmvc/5.2.8.RELEASE/spring-webmvc-5.2.8.RELEASE.jar;C:/Users/kaspr/.m2/repository/org/springframework/spring-aop/5.2.8.RELEASE/spring-aop-5.2.8.RELEASE.jar;C:/Users/kaspr/.m2/repository/org/springframework/spring-context/5.2.8.RELEASE/spring-context-5.2.8.RELEASE.jar;C:/Users/kaspr/.m2/repository/org/springframework/spring-expression/5.2.8.RELEASE/spring-expression-5.2.8.RELEASE.jar;C:/Users/kaspr/.m2/repository/org/springframework/spring-core/5.2.8.RELEASE/spring-core-5.2.8.RELEASE.jar;C:/Users/kaspr/.m2/repository/org/springframework/spring-jcl/5.2.8.RELEASE/spring-jcl-5.2.8.RELEASE.jar;C:/Users/kaspr/.m2/repository/org/slf4j/slf4j-api/1.7.30/slf4j-api-1.7.30.jar'
+-encoding
+'UTF-8'
+-protected
+-source
+'11'
+-sourcepath
+'C:/Users/kaspr/OneDrive - put.poznan.pl/Term V/IO/projekt/IOD-L11-Alpha/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2024. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'C:/Users/kaspr/OneDrive - put.poznan.pl/Term V/IO/projekt/IOD-L11-Alpha/target/site/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'BuildingInfo 1.0.0 API'
+-linkoffline
+'https://docs.oracle.com/en/java/javase/11/docs/api' 'C:/Users/kaspr/OneDrive - put.poznan.pl/Term V/IO/projekt/IOD-L11-Alpha/target/javadoc-bundle-options'
+-use
+-version
+-windowtitle
+'BuildingInfo 1.0.0 API'
+pl.put.poznan.buildingInfo.app
+pl.put.poznan.buildingInfo.logic.locations
+pl.put.poznan.buildingInfo.logic.visitors
+pl.put.poznan.buildingInfo.rest
+'C:/Users/kaspr/OneDrive - put.poznan.pl/Term V/IO/projekt/IOD-L11-Alpha/src/main/java/pl/put/poznan/buildingInfo/app/BuildingInfoApplication.java'
+'C:/Users/kaspr/OneDrive - put.poznan.pl/Term V/IO/projekt/IOD-L11-Alpha/src/main/java/pl/put/poznan/buildingInfo/logic/locations/Building.java'
+'C:/Users/kaspr/OneDrive - put.poznan.pl/Term V/IO/projekt/IOD-L11-Alpha/src/main/java/pl/put/poznan/buildingInfo/logic/locations/Level.java'
+'C:/Users/kaspr/OneDrive - put.poznan.pl/Term V/IO/projekt/IOD-L11-Alpha/src/main/java/pl/put/poznan/buildingInfo/logic/locations/Location.java'
+'C:/Users/kaspr/OneDrive - put.poznan.pl/Term V/IO/projekt/IOD-L11-Alpha/src/main/java/pl/put/poznan/buildingInfo/logic/locations/Room.java'
+'C:/Users/kaspr/OneDrive - put.poznan.pl/Term V/IO/projekt/IOD-L11-Alpha/src/main/java/pl/put/poznan/buildingInfo/logic/locations/Visitable.java'
+'C:/Users/kaspr/OneDrive - put.poznan.pl/Term V/IO/projekt/IOD-L11-Alpha/src/main/java/pl/put/poznan/buildingInfo/logic/visitors/AreaVisitor.java'
+'C:/Users/kaspr/OneDrive - put.poznan.pl/Term V/IO/projekt/IOD-L11-Alpha/src/main/java/pl/put/poznan/buildingInfo/logic/visitors/CubeVisitor.java'
+'C:/Users/kaspr/OneDrive - put.poznan.pl/Term V/IO/projekt/IOD-L11-Alpha/src/main/java/pl/put/poznan/buildingInfo/logic/visitors/EnergyVisitor.java'
+'C:/Users/kaspr/OneDrive - put.poznan.pl/Term V/IO/projekt/IOD-L11-Alpha/src/main/java/pl/put/poznan/buildingInfo/logic/visitors/ExceedingHeatingVisitor.java'
+'C:/Users/kaspr/OneDrive - put.poznan.pl/Term V/IO/projekt/IOD-L11-Alpha/src/main/java/pl/put/poznan/buildingInfo/logic/visitors/LightVisitor.java'
+'C:/Users/kaspr/OneDrive - put.poznan.pl/Term V/IO/projekt/IOD-L11-Alpha/src/main/java/pl/put/poznan/buildingInfo/logic/visitors/Visitor.java'
+'C:/Users/kaspr/OneDrive - put.poznan.pl/Term V/IO/projekt/IOD-L11-Alpha/src/main/java/pl/put/poznan/buildingInfo/rest/BuildingController.java'
+'C:/Users/kaspr/OneDrive - put.poznan.pl/Term V/IO/projekt/IOD-L11-Alpha/src/main/java/pl/put/poznan/buildingInfo/rest/LevelController.java'
+'C:/Users/kaspr/OneDrive - put.poznan.pl/Term V/IO/projekt/IOD-L11-Alpha/src/main/java/pl/put/poznan/buildingInfo/rest/RoomController.java'
+C:\Users\kaspr\.m2\repository\org\springframework\boot\spring-boot-starter-web\2.3.3.RELEASE\spring-boot-starter-web-2.3.3.RELEASE.jar = 1732474803275
+C:\Users\kaspr\.m2\repository\org\springframework\boot\spring-boot-starter\2.3.3.RELEASE\spring-boot-starter-2.3.3.RELEASE.jar = 1732474801634
+C:\Users\kaspr\.m2\repository\org\springframework\boot\spring-boot\2.3.3.RELEASE\spring-boot-2.3.3.RELEASE.jar = 1732474802669
+C:\Users\kaspr\.m2\repository\org\springframework\boot\spring-boot-autoconfigure\2.3.3.RELEASE\spring-boot-autoconfigure-2.3.3.RELEASE.jar = 1732474804438
+C:\Users\kaspr\.m2\repository\org\springframework\boot\spring-boot-starter-logging\2.3.3.RELEASE\spring-boot-starter-logging-2.3.3.RELEASE.jar = 1732474801666
+C:\Users\kaspr\.m2\repository\ch\qos\logback\logback-classic\1.2.3\logback-classic-1.2.3.jar = 1732474802197
+C:\Users\kaspr\.m2\repository\ch\qos\logback\logback-core\1.2.3\logback-core-1.2.3.jar = 1732474803367
+C:\Users\kaspr\.m2\repository\org\apache\logging\log4j\log4j-to-slf4j\2.13.3\log4j-to-slf4j-2.13.3.jar = 1732474802954
+C:\Users\kaspr\.m2\repository\org\apache\logging\log4j\log4j-api\2.13.3\log4j-api-2.13.3.jar = 1732474803701
+C:\Users\kaspr\.m2\repository\org\slf4j\jul-to-slf4j\1.7.30\jul-to-slf4j-1.7.30.jar = 1732474803183
+C:\Users\kaspr\.m2\repository\jakarta\annotation\jakarta.annotation-api\1.3.5\jakarta.annotation-api-1.3.5.jar = 1709330021491
+C:\Users\kaspr\.m2\repository\org\yaml\snakeyaml\1.26\snakeyaml-1.26.jar = 1732474802911
+C:\Users\kaspr\.m2\repository\org\springframework\boot\spring-boot-starter-json\2.3.3.RELEASE\spring-boot-starter-json-2.3.3.RELEASE.jar = 1732474804140
+C:\Users\kaspr\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.11.2\jackson-databind-2.11.2.jar = 1732474803748
+C:\Users\kaspr\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.11.2\jackson-annotations-2.11.2.jar = 1732474803365
+C:\Users\kaspr\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.11.2\jackson-core-2.11.2.jar = 1732474802118
+C:\Users\kaspr\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jdk8\2.11.2\jackson-datatype-jdk8-2.11.2.jar = 1732474804008
+C:\Users\kaspr\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jsr310\2.11.2\jackson-datatype-jsr310-2.11.2.jar = 1732474804047
+C:\Users\kaspr\.m2\repository\com\fasterxml\jackson\module\jackson-module-parameter-names\2.11.2\jackson-module-parameter-names-2.11.2.jar = 1732474803979
+C:\Users\kaspr\.m2\repository\org\springframework\boot\spring-boot-starter-tomcat\2.3.3.RELEASE\spring-boot-starter-tomcat-2.3.3.RELEASE.jar = 1732474804230
+C:\Users\kaspr\.m2\repository\org\apache\tomcat\embed\tomcat-embed-core\9.0.37\tomcat-embed-core-9.0.37.jar = 1732474804815
+C:\Users\kaspr\.m2\repository\org\glassfish\jakarta.el\3.0.3\jakarta.el-3.0.3.jar = 1732474805053
+C:\Users\kaspr\.m2\repository\org\apache\tomcat\embed\tomcat-embed-websocket\9.0.37\tomcat-embed-websocket-9.0.37.jar = 1732474804406
+C:\Users\kaspr\.m2\repository\org\springframework\spring-web\5.2.8.RELEASE\spring-web-5.2.8.RELEASE.jar = 1732474804105
+C:\Users\kaspr\.m2\repository\org\springframework\spring-beans\5.2.8.RELEASE\spring-beans-5.2.8.RELEASE.jar = 1732474803253
+C:\Users\kaspr\.m2\repository\org\springframework\spring-webmvc\5.2.8.RELEASE\spring-webmvc-5.2.8.RELEASE.jar = 1732474804417
+C:\Users\kaspr\.m2\repository\org\springframework\spring-aop\5.2.8.RELEASE\spring-aop-5.2.8.RELEASE.jar = 1732474803635
+C:\Users\kaspr\.m2\repository\org\springframework\spring-context\5.2.8.RELEASE\spring-context-5.2.8.RELEASE.jar = 1732474803894
+C:\Users\kaspr\.m2\repository\org\springframework\spring-expression\5.2.8.RELEASE\spring-expression-5.2.8.RELEASE.jar = 1732474801819
+C:\Users\kaspr\.m2\repository\org\springframework\spring-core\5.2.8.RELEASE\spring-core-5.2.8.RELEASE.jar = 1732474802376
+C:\Users\kaspr\.m2\repository\org\springframework\spring-jcl\5.2.8.RELEASE\spring-jcl-5.2.8.RELEASE.jar = 1732474802604
+C:\Users\kaspr\.m2\repository\org\slf4j\slf4j-api\1.7.30\slf4j-api-1.7.30.jar = 1732474802661
+C:\Users\kaspr\OneDrive - put.poznan.pl\Term V\IO\projekt\IOD-L11-Alpha\src\main\java = 1733655061986
+C:\Users\kaspr\OneDrive - put.poznan.pl\Term V\IO\projekt\IOD-L11-Alpha\target\site\apidocs\allclasses-index.html = 1734556592068
+C:\Users\kaspr\OneDrive - put.poznan.pl\Term V\IO\projekt\IOD-L11-Alpha\target\site\apidocs\allclasses.html = 1734556592103
+C:\Users\kaspr\OneDrive - put.poznan.pl\Term V\IO\projekt\IOD-L11-Alpha\target\site\apidocs\allpackages-index.html = 1734556592077
+C:\Users\kaspr\OneDrive - put.poznan.pl\Term V\IO\projekt\IOD-L11-Alpha\target\site\apidocs\constant-values.html = 1734556591563
+C:\Users\kaspr\OneDrive - put.poznan.pl\Term V\IO\projekt\IOD-L11-Alpha\target\site\apidocs\deprecated-list.html = 1734556592097
+C:\Users\kaspr\OneDrive - put.poznan.pl\Term V\IO\projekt\IOD-L11-Alpha\target\site\apidocs\element-list = 1734556591413
+C:\Users\kaspr\OneDrive - put.poznan.pl\Term V\IO\projekt\IOD-L11-Alpha\target\site\apidocs\help-doc.html = 1734556592146
+C:\Users\kaspr\OneDrive - put.poznan.pl\Term V\IO\projekt\IOD-L11-Alpha\target\site\apidocs\index-all.html = 1734556592027
+C:\Users\kaspr\OneDrive - put.poznan.pl\Term V\IO\projekt\IOD-L11-Alpha\target\site\apidocs\index.html = 1734556592124
+C:\Users\kaspr\OneDrive - put.poznan.pl\Term V\IO\projekt\IOD-L11-Alpha\target\site\apidocs\member-search-index.js = 1734556592010
+C:\Users\kaspr\OneDrive - put.poznan.pl\Term V\IO\projekt\IOD-L11-Alpha\target\site\apidocs\member-search-index.zip = 1734556592019
+C:\Users\kaspr\OneDrive - put.poznan.pl\Term V\IO\projekt\IOD-L11-Alpha\target\site\apidocs\overview-summary.html = 1734556592135
+C:\Users\kaspr\OneDrive - put.poznan.pl\Term V\IO\projekt\IOD-L11-Alpha\target\site\apidocs\overview-tree.html = 1734556591896
+C:\Users\kaspr\OneDrive - put.poznan.pl\Term V\IO\projekt\IOD-L11-Alpha\target\site\apidocs\package-search-index.js = 1734556591973
+C:\Users\kaspr\OneDrive - put.poznan.pl\Term V\IO\projekt\IOD-L11-Alpha\target\site\apidocs\package-search-index.zip = 1734556591993
+C:\Users\kaspr\OneDrive - put.poznan.pl\Term V\IO\projekt\IOD-L11-Alpha\target\site\apidocs\script.js = 1734556592164
+C:\Users\kaspr\OneDrive - put.poznan.pl\Term V\IO\projekt\IOD-L11-Alpha\target\site\apidocs\search.js = 1734556592174
+C:\Users\kaspr\OneDrive - put.poznan.pl\Term V\IO\projekt\IOD-L11-Alpha\target\site\apidocs\stylesheet.css = 1734556592159
+C:\Users\kaspr\OneDrive - put.poznan.pl\Term V\IO\projekt\IOD-L11-Alpha\target\site\apidocs\type-search-index.js = 1734556591998
+C:\Users\kaspr\OneDrive - put.poznan.pl\Term V\IO\projekt\IOD-L11-Alpha\target\site\apidocs\type-search-index.zip = 1734556592003
