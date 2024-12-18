@@ -231,7 +231,7 @@ public class RoomController {
      * @param roomId identyfikator pomieszczenia
      * @return całkowita moc oświetlenia pomieszczenia (w watach)
      */
-    @RequestMapping(value="/{roomId}/light", method = RequestMethod.GET, produces="application/json")
+    @RequestMapping(value="/{roomId}/light-power", method = RequestMethod.GET, produces="application/json")
     public ResponseEntity<Map<String, Object>> getLightPowerOfBuilding(@PathVariable int buildingId, @PathVariable int levelId, @PathVariable int roomId) {
         Room room = getRoom(buildingId, levelId, roomId);
         LightVisitor lightVisitor = new LightVisitor();

@@ -191,7 +191,7 @@ public class BuildingController {
      * @return ResponseEntity zawierający wartość sumarycznej mocy oświetlenia budynku w formacie JSON
      * @throws ResponseStatusException jeśli budynek o podanym identyfikatorze nie istnieje
      */
-    @RequestMapping(value = "/{buildingId}/light", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/{buildingId}/light-power", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<Map<String, Object>> getLightPowerOfBuilding(@PathVariable int buildingId) {
         Building building = getBuilding(buildingId);
         LightVisitor lightVisitor = new LightVisitor();
@@ -212,7 +212,7 @@ public class BuildingController {
      * @return ResponseEntity zawierający wartość sumarycznego zużycia energii na ogrzewanie w budynku w formacie JSON
      * @throws ResponseStatusException jeśli budynek o podanym identyfikatorze nie istnieje
      */
-    @RequestMapping(value = "/{buildingId}/energy", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/{buildingId}/energy-consumption", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<Map<String, Object>> getEnergyConsumption(@PathVariable int buildingId) {
         Building building = getBuilding(buildingId);
         EnergyVisitor energyVisitor = new EnergyVisitor();
