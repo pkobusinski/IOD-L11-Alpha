@@ -223,7 +223,7 @@ public class RoomController {
      * @return calkowita moc oświetlenia pomieszczenia (w watach)
      */
     @RequestMapping(value="/{roomId}/light-power", method = RequestMethod.GET, produces="application/json")
-    public ResponseEntity<Map<String, Object>> getLightPowerOfBuilding(@PathVariable int buildingId, @PathVariable int levelId, @PathVariable int roomId) {
+    public ResponseEntity<Map<String, Object>> getLightPowerOfRoom(@PathVariable int buildingId, @PathVariable int levelId, @PathVariable int roomId) {
         Room room = getRoom(buildingId, levelId, roomId);
         LightVisitor lightVisitor = new LightVisitor();
         logger.debug("Calculating total light power for room ID: {}", roomId);
@@ -245,7 +245,7 @@ public class RoomController {
      * @return calkowite zuzycie energii pomieszczenia (w kilowatogodzinach)
      */
     @RequestMapping(value="/{roomId}/energy-consumption", method = RequestMethod.GET, produces="application/json")
-    public ResponseEntity<Map<String, Object>> getEnergyConsumptionOfBuilding(@PathVariable int buildingId, @PathVariable int levelId, @PathVariable int roomId) {
+    public ResponseEntity<Map<String, Object>> getEnergyConsumptionOfRoom(@PathVariable int buildingId, @PathVariable int levelId, @PathVariable int roomId) {
         Room room = getRoom(buildingId, levelId, roomId);
         EnergyVisitor energyVisitor = new EnergyVisitor();
         logger.debug("Calculating total energy consumption for room ID: {}", roomId);
