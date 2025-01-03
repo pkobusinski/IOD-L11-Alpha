@@ -1,5 +1,6 @@
 package pl.put.poznan.buildingInfo.rest;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -8,21 +9,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import pl.put.poznan.buildingInfo.logic.locations.Building;
 import pl.put.poznan.buildingInfo.logic.locations.Level;
-import pl.put.poznan.buildingInfo.logic.visitors.AreaVisitor;
-import pl.put.poznan.buildingInfo.logic.visitors.CubeVisitor;
-import pl.put.poznan.buildingInfo.logic.visitors.EnergyVisitor;
-import pl.put.poznan.buildingInfo.logic.visitors.LightVisitor;
+import pl.put.poznan.buildingInfo.logic.visitors.*;
 
 /**
  * Kontroler obslugujący operacje CRUD dla poziomow ({@link Level}) w ramach budynkow ({@link Building}).
@@ -262,6 +254,36 @@ public class LevelController {
         logger.info("Energy consumption for level ID {}: {}", levelId, energyConsumption);
 
         Map<String, Object> response = Map.of("energyConsumption", energyConsumption);
+
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @RequestMapping(value = "/{levelId}/light-cost", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<Map<String, Object>> getLightCostOnLevel(@PathVariable int buildingId, @PathVariable int levelId, @RequestParam double lightCost) {
+        Level level = getLevel(buildingId, levelId);
+        logger.debug("Checking the cost of light for level with ID: {} in building with ID: {}", levelId, buildingId);
+        LightCostVisitor visitor = new LightCostVisitor(lightCost);
+
+        level.accept(visitor);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("cost of lighting", visitor.visit(level));
+        logger.info("The cost of lighting for level with ID: {} in building with ID: {} is {}", levelId, buildingId, visitor.visit(level));
+
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @RequestMapping(value = "/{levelId}/energy-cost", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<Map<String, Object>> getEnergyCostOnLevel(@PathVariable int buildingId, @PathVariable int levelId, @RequestParam double energyCost) {
+        Level level = getLevel(buildingId, levelId);
+        logger.debug("Checking the cost of energy for level with ID: {} in building with ID: {}", levelId, buildingId);
+        EnergyCostVisitor visitor = new EnergyCostVisitor(energyCost);
+
+        level.accept(visitor);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("cost of energy", visitor.visit(level));
+        logger.info("The cost of energy for level with ID: {} in building with ID: {} is {}", levelId, buildingId, visitor.visit(level));
 
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }

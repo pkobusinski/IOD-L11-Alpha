@@ -9,22 +9,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import pl.put.poznan.buildingInfo.logic.locations.Building;
 import pl.put.poznan.buildingInfo.logic.locations.Level;
 import pl.put.poznan.buildingInfo.logic.locations.Room;
-import pl.put.poznan.buildingInfo.logic.visitors.AreaVisitor;
-import pl.put.poznan.buildingInfo.logic.visitors.CubeVisitor;
-import pl.put.poznan.buildingInfo.logic.visitors.EnergyVisitor;
-import pl.put.poznan.buildingInfo.logic.visitors.LightVisitor;
+import pl.put.poznan.buildingInfo.logic.visitors.*;
 
 
 /**
@@ -264,6 +255,36 @@ public class RoomController {
 
         Map<String, Object> response = new HashMap<>();
         response.put("energy consumption:", energy);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @RequestMapping(value = "/{roomId}/light-cost", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<Map<String, Object>> getLightCostOfRoom(@PathVariable int buildingId, @PathVariable int levelId, @PathVariable int roomId, @RequestParam double lightCost) {
+        Room room = getRoom(buildingId, levelId, roomId);
+        logger.debug("Checking the cost of light of room with ID: {} on level with ID: {} in building with ID: {}", roomId, levelId, buildingId);
+        LightCostVisitor visitor = new LightCostVisitor(lightCost);
+
+        room.accept(visitor);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("cost of lighting", visitor.visit(room));
+        logger.info("The cost of lighting of room with ID: {} on level with ID: {} in building with ID: {} is {}", roomId, levelId, buildingId, visitor.visit(room));
+
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @RequestMapping(value = "/{roomId}/energy-cost", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<Map<String, Object>> getEnergyCostOfRoom(@PathVariable int buildingId, @PathVariable int levelId, @PathVariable int roomId, @RequestParam double energyCost) {
+        Room room = getRoom(buildingId, levelId, roomId);
+        logger.debug("Checking the cost of energy of room with ID: {} on level with ID: {} in building with ID: {}", roomId, levelId, buildingId);
+        EnergyCostVisitor visitor = new EnergyCostVisitor(energyCost);
+
+        room.accept(visitor);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("cost of energy", visitor.visit(room));
+        logger.info("The cost of energy of room with ID: {} on level with ID: {} in building with ID: {} is {}", roomId, levelId, buildingId, visitor.visit(room));
+
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 

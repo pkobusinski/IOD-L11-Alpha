@@ -1,4 +1,30 @@
 package pl.put.poznan.buildingInfo.logic.visitors;
 
-public class LightCostVisitor {
+import pl.put.poznan.buildingInfo.logic.locations.Building;
+import pl.put.poznan.buildingInfo.logic.locations.Level;
+import pl.put.poznan.buildingInfo.logic.locations.Room;
+
+public class LightCostVisitor implements Visitor {
+
+    private double lightCost;
+    private LightVisitor lightVisitor = new LightVisitor();
+
+    public LightCostVisitor(double lightCost) {
+        this.lightCost = lightCost;
+    }
+
+    @Override
+    public double visit(Room room) {
+        return lightVisitor.visit(room) * lightCost;
+    }
+
+    @Override
+    public double visit(Level level) {
+        return lightVisitor.visit(level) * lightCost;
+    }
+
+    @Override
+    public double visit(Building building) {
+        return lightVisitor.visit(building) * lightCost;
+    }
 }

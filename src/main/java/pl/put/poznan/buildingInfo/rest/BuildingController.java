@@ -251,6 +251,36 @@ public class BuildingController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
+    @RequestMapping(value = "/{buildingId}/light-cost", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<Map<String, Object>> getLightCostInBuilding(@PathVariable int buildingId, @RequestParam double lightCost) {
+        Building building = getBuilding(buildingId);
+        logger.debug("Checking the cost of light for building ID: {}", buildingId);
+        LightCostVisitor visitor = new LightCostVisitor(lightCost);
+
+        building.accept(visitor);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("cost of lighting", visitor.visit(building));
+        logger.info("The cost of lighting for the building with ID: {} is {}", buildingId, visitor.visit(building));
+
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @RequestMapping(value = "/{buildingId}/energy-cost", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<Map<String, Object>> getEnergyCostInBuilding(@PathVariable int buildingId, @RequestParam double energyCost) {
+        Building building = getBuilding(buildingId);
+        logger.debug("Checking the cost of energy for building ID: {}", buildingId);
+        EnergyCostVisitor visitor = new EnergyCostVisitor(energyCost);
+
+        building.accept(visitor);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("cost of energy", visitor.visit(building));
+        logger.info("The cost of energy for the building with ID: {} is {}", buildingId, visitor.visit(building));
+
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
 }
 
 
