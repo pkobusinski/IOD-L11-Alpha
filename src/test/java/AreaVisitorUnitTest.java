@@ -12,9 +12,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AreaVisitorUnitTest {
 
-    private AreaVisitor visitor = new AreaVisitor();
-    private List<Room> rooms = new ArrayList<Room>();
-    private List<Room> rooms2 = new ArrayList<Room>();
+    private AreaVisitor visitor;
+    private List<Room> rooms;
+    private List<Room> rooms2;
 
     private Level level;
     private Level level2;
@@ -25,6 +25,10 @@ public class AreaVisitorUnitTest {
 
     @BeforeEach
     void setUp() {
+        visitor = new AreaVisitor();
+        rooms = new ArrayList<Room>();
+        rooms2 = new ArrayList<Room>();
+
         for (int i = 0; i < 5; i++) {
             rooms.add(new Room(i, "Room " + String.valueOf(i), 100, 100, 100, 100));
             rooms2.add(new Room(i, "Room " + String.valueOf(i), 100, 100, 100, 100));
@@ -43,7 +47,6 @@ public class AreaVisitorUnitTest {
         building.add(level2);
 
         buildingWithoutLevels = new Building(2, "Building 2");
-
     }
 
     @Test

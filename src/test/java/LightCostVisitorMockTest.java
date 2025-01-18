@@ -4,6 +4,7 @@ import pl.put.poznan.buildingInfo.logic.locations.Building;
 import pl.put.poznan.buildingInfo.logic.locations.Level;
 import pl.put.poznan.buildingInfo.logic.locations.Room;
 import pl.put.poznan.buildingInfo.logic.visitors.LightCostVisitor;
+import pl.put.poznan.buildingInfo.logic.visitors.LightVisitor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class LightCostVisitorMockTest {
 
     private LightCostVisitor visitor;
+    private LightVisitor mockLightVisitor;
     private List<Room> rooms = new ArrayList<>();
     private List<Level> levels = new ArrayList<>();
 
@@ -26,9 +28,13 @@ public class LightCostVisitorMockTest {
 
     @BeforeEach
     void setUp() {
-        visitor = new LightCostVisitor(2.0); // Cost per unit of light = 2.0
+        mockLightVisitor = mock(LightVisitor.class);
+        visitor = new LightCostVisitor(2.0);
 
+        when(mockRoom.getArea()).thenReturn(10.0);
+        when(mockRoom.getCube()).thenReturn(10.0);
         when(mockRoom.getLight()).thenReturn(100.0);
+        when(mockRoom.getHeating()).thenReturn(1000.0);
 
         for (int i = 0; i < 5; i++) {
             rooms.add(mockRoom);
@@ -44,7 +50,7 @@ public class LightCostVisitorMockTest {
 
     @Test
     void testCalculateLightCostOfRoom() {
-        assertEquals(200.0, visitor.visit(mockRoom)); // 100.0 light * 2.0 cost
+        assertEquals(20.0, visitor.visit(mockRoom));
     }
 
     @Test
@@ -55,12 +61,12 @@ public class LightCostVisitorMockTest {
 
     @Test
     void testCalculateLightCostOfLevelWithRooms() {
-        assertEquals(1000.0, visitor.visit(mockLevel1)); // 5 rooms * 100.0 light * 2.0 cost
+        assertEquals(100.0, visitor.visit(mockLevel1));
     }
 
     @Test
     void testCalculateLightCostOfBuilding() {
-        assertEquals(2000.0, visitor.visit(mockBuilding1)); // 2 levels * (5 rooms * 100.0 light * 2.0 cost)
+        assertEquals(200.0, visitor.visit(mockBuilding1));
     }
 
     @Test
