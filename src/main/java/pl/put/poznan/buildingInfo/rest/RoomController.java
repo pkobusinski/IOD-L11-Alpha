@@ -9,13 +9,25 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import pl.put.poznan.buildingInfo.logic.locations.Building;
 import pl.put.poznan.buildingInfo.logic.locations.Level;
 import pl.put.poznan.buildingInfo.logic.locations.Room;
-import pl.put.poznan.buildingInfo.logic.visitors.*;
+import pl.put.poznan.buildingInfo.logic.visitors.AreaVisitor;
+import pl.put.poznan.buildingInfo.logic.visitors.CubeVisitor;
+import pl.put.poznan.buildingInfo.logic.visitors.EnergyCostVisitor;
+import pl.put.poznan.buildingInfo.logic.visitors.EnergyVisitor;
+import pl.put.poznan.buildingInfo.logic.visitors.LightCostVisitor;
+import pl.put.poznan.buildingInfo.logic.visitors.LightVisitor;
 
 
 /**
@@ -258,6 +270,16 @@ public class RoomController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
+    /**
+     * Oblicza koszt oświetlenia w pomieszczeniu o podanym identyfikatorze na poziomie o podanym identyfikatorze w budynku o podanym identyfikatorze.
+     *
+     * @param buildingId identyfikator budynku
+     * @param levelId identyfikator poziomu
+     * @param roomId identyfikator pomieszczenia
+     * @param lightCost koszt oświetlenia na jednostkę
+     * @return odpowiedź zawierająca koszt oświetlenia w pomieszczeniu
+     * @throws ResponseStatusException jeśli pomieszczenie o podanym identyfikatorze nie istnieje
+     */
     @RequestMapping(value = "/{roomId}/light-cost", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<Map<String, Object>> getLightCostOfRoom(@PathVariable int buildingId, @PathVariable int levelId, @PathVariable int roomId, @RequestParam double lightCost) {
         Room room = getRoom(buildingId, levelId, roomId);
@@ -273,6 +295,16 @@ public class RoomController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
+    /**
+     * Oblicza koszt energii w pomieszczeniu o podanym identyfikatorze na poziomie o podanym identyfikatorze w budynku o podanym identyfikatorze.
+     *
+     * @param buildingId identyfikator budynku
+     * @param levelId identyfikator poziomu
+     * @param roomId identyfikator pomieszczenia
+     * @param energyCost koszt energii na jednostkę
+     * @return odpowiedź zawierająca koszt energii w pomieszczeniu
+     * @throws ResponseStatusException jeśli pomieszczenie o podanym identyfikatorze nie istnieje
+     */
     @RequestMapping(value = "/{roomId}/energy-cost", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<Map<String, Object>> getEnergyCostOfRoom(@PathVariable int buildingId, @PathVariable int levelId, @PathVariable int roomId, @RequestParam double energyCost) {
         Room room = getRoom(buildingId, levelId, roomId);
