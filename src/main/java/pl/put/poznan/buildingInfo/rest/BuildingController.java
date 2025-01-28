@@ -5,20 +5,34 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import javax.annotation.PostConstruct;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import pl.put.poznan.buildingInfo.logic.locations.Building;
-import pl.put.poznan.buildingInfo.logic.locations.Room;
-import pl.put.poznan.buildingInfo.logic.visitors.*;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
-import javax.annotation.PostConstruct;
+import pl.put.poznan.buildingInfo.logic.locations.Building;
+import pl.put.poznan.buildingInfo.logic.visitors.AreaVisitor;
+import pl.put.poznan.buildingInfo.logic.visitors.CubeVisitor;
+import pl.put.poznan.buildingInfo.logic.visitors.EnergyCostVisitor;
+import pl.put.poznan.buildingInfo.logic.visitors.EnergyVisitor;
+import pl.put.poznan.buildingInfo.logic.visitors.ExceedingHeatingVisitor;
+import pl.put.poznan.buildingInfo.logic.visitors.LightCostVisitor;
+import pl.put.poznan.buildingInfo.logic.visitors.LightVisitor;
 
 /**
  * Kontroler obslugujący operacje CRUD dla budynkow oraz dodatkowe obliczenia związane z ich wlaściwościami.
@@ -250,7 +264,14 @@ public class BuildingController {
 
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
-
+    /**
+     * Oblicza koszt oświetlenia w budynku o podanym identyfikatorze.
+     *
+     * @param buildingId identyfikator budynku
+     * @param lightCost koszt oświetlenia na jednostkę
+     * @return odpowiedź zawierająca koszt oświetlenia w budynku
+     * @throws ResponseStatusException jeśli budynek o podanym identyfikatorze nie istnieje
+     */
     @RequestMapping(value = "/{buildingId}/light-cost", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<Map<String, Object>> getLightCostInBuilding(@PathVariable int buildingId, @RequestParam double lightCost) {
         Building building = getBuilding(buildingId);
@@ -265,7 +286,15 @@ public class BuildingController {
 
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
-
+    
+    /**
+     * Oblicza koszt energii w budynku o podanym identyfikatorze.
+     *
+     * @param buildingId identyfikator budynku
+     * @param energyCost koszt energii na jednostkę
+     * @return odpowiedź zawierająca koszt energii w budynku
+     * @throws ResponseStatusException jeśli budynek o podanym identyfikatorze nie istnieje
+     */
     @RequestMapping(value = "/{buildingId}/energy-cost", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<Map<String, Object>> getEnergyCostInBuilding(@PathVariable int buildingId, @RequestParam double energyCost) {
         Building building = getBuilding(buildingId);
