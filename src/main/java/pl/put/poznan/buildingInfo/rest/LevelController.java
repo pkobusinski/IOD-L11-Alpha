@@ -9,12 +9,24 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import pl.put.poznan.buildingInfo.logic.locations.Building;
 import pl.put.poznan.buildingInfo.logic.locations.Level;
-import pl.put.poznan.buildingInfo.logic.visitors.*;
+import pl.put.poznan.buildingInfo.logic.visitors.AreaVisitor;
+import pl.put.poznan.buildingInfo.logic.visitors.CubeVisitor;
+import pl.put.poznan.buildingInfo.logic.visitors.EnergyCostVisitor;
+import pl.put.poznan.buildingInfo.logic.visitors.EnergyVisitor;
+import pl.put.poznan.buildingInfo.logic.visitors.LightCostVisitor;
+import pl.put.poznan.buildingInfo.logic.visitors.LightVisitor;
 
 /**
  * Kontroler obslugujący operacje CRUD dla poziomow ({@link Level}) w ramach budynkow ({@link Building}).
@@ -257,7 +269,16 @@ public class LevelController {
 
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
-
+    
+    /**
+     * Oblicza koszt oświetlenia na poziomie o podanym identyfikatorze w budynku o podanym identyfikatorze.
+     *
+     * @param buildingId identyfikator budynku
+     * @param levelId identyfikator poziomu
+     * @param lightCost koszt oświetlenia na jednostkę
+     * @return odpowiedź zawierająca koszt oświetlenia na poziomie
+     * @throws ResponseStatusException jeśli poziom o podanym identyfikatorze nie istnieje
+     */
     @RequestMapping(value = "/{levelId}/light-cost", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<Map<String, Object>> getLightCostOnLevel(@PathVariable int buildingId, @PathVariable int levelId, @RequestParam double lightCost) {
         Level level = getLevel(buildingId, levelId);
@@ -273,6 +294,15 @@ public class LevelController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
+    /**
+     * Oblicza koszt energii na poziomie o podanym identyfikatorze w budynku o podanym identyfikatorze.
+     *
+     * @param buildingId identyfikator budynku
+     * @param levelId identyfikator poziomu
+     * @param energyCost koszt energii na jednostkę
+     * @return odpowiedź zawierająca koszt energii na poziomie
+     * @throws ResponseStatusException jeśli poziom o podanym identyfikatorze nie istnieje
+     */
     @RequestMapping(value = "/{levelId}/energy-cost", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<Map<String, Object>> getEnergyCostOnLevel(@PathVariable int buildingId, @PathVariable int levelId, @RequestParam double energyCost) {
         Level level = getLevel(buildingId, levelId);

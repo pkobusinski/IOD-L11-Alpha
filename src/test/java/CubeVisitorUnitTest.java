@@ -1,71 +1,63 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InOrder;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import pl.put.poznan.buildingInfo.logic.locations.Building;
 import pl.put.poznan.buildingInfo.logic.locations.Level;
 import pl.put.poznan.buildingInfo.logic.locations.Room;
 import pl.put.poznan.buildingInfo.logic.visitors.CubeVisitor;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CubeVisitorUnitTest {
 
-    private CubeVisitor visitor = new CubeVisitor();
-    private List<Room> rooms= new ArrayList<Room>();;
-    private List<Level> levels = new ArrayList<Level>();;
-
-    private Room mockRoom = mock(Room.class);
-    private Level mockLevelWithoutRooms = mock(Level.class);
-    private Level mockLevel1 = mock(Level.class);
-    private Level mockLevel2 = mock(Level.class);
-    private Building mockEmptyBuilding = mock(Building.class);
-    private Building mockBuilding1 = mock(Building.class);
+    private CubeVisitor cubeVisitor;
+    private Room room1;
+    private Room room2;
+    private Room room3;
+    private Level level1;
+    private Level level2;
+    private Building building;
 
     @BeforeEach
     void setUp() {
-        when(mockRoom.getArea()).thenReturn(100.0);
-        when(mockRoom.getCube()).thenReturn(100.0);
-        when(mockRoom.getLight()).thenReturn(100.0);
-        when(mockRoom.getHeating()).thenReturn(100.0);
+        cubeVisitor = new CubeVisitor();
 
-        for(int i = 0; i<5; i++)
-            rooms.add(mockRoom);
+        room1 = new Room(1, "Room1", 100, 100, 100, 100);
+        room2 = new Room(2, "Room2", 100, 100, 100, 100);
+        room3 = new Room(3, "Room3", 100, 100, 100, 100);
 
-        when(mockLevel1.getRoomsOnLevel()).thenReturn(rooms);
-        when(mockLevel2.getRoomsOnLevel()).thenReturn(rooms);
-        levels.add(mockLevel1);
-        levels.add(mockLevel2);
+        level1 = new Level();
+        level1.add(room1);
 
-        when(mockBuilding1.getLevelsInBuilding()).thenReturn(levels);
+        level2 = new Level();
+        level2.add(room2);
+        level2.add(room3);
+
+        building = new Building();
+        building.add(level1);
+        building.add(level2);
+    }
+
+    @Test
+    void testCountCubeOfLevelWithOneRoom() {
+        assertEquals(100.0, cubeVisitor.visit(level1));
+    }
+
+    @Test
+    void testCountCubeOfLevelWithMultipleRooms() {
+        assertEquals(200.0, cubeVisitor.visit(level2));
     }
 
     @Test
     void testCountCubeOfRoom() {
-        assertEquals(100.0, visitor.visit(mockRoom));
-    }
-
-    @Test
-    void testCountCubeOfLevelWithoutRooms() {
-        assertEquals(0, visitor.visit(mockLevelWithoutRooms));
-    }
-
-    @Test
-    void testCountCubeOfLevelWithRooms() {
-        assertEquals(500.0, visitor.visit(mockLevel1));
+        assertEquals(100.0, cubeVisitor.visit(room1));
     }
     @Test
-    void testCountCubeOfBuilding() {
-        assertEquals(1000, visitor.visit(mockBuilding1));
+    void testCountCubeOfBuildingWithOneLevel() {
+        Building singleLevelBuilding = new Building();
+        singleLevelBuilding.add(level1);
+        assertEquals(100.0, cubeVisitor.visit(singleLevelBuilding));
     }
     @Test
     void testCountCubeOfEmptyBuilding() {
-        assertEquals(0, visitor.visit(mockEmptyBuilding));
+        assertEquals(300.0, cubeVisitor.visit(building));
     }
 }

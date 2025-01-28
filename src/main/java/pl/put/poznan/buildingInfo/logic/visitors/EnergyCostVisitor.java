@@ -4,6 +4,12 @@ import pl.put.poznan.buildingInfo.logic.locations.Building;
 import pl.put.poznan.buildingInfo.logic.locations.Level;
 import pl.put.poznan.buildingInfo.logic.locations.Room;
 
+/**
+ * Klasa obliczająca koszt energii dla pomieszczeń, poziomów i budynków.
+ * 
+ * Implementacja wzorca odwiedzającego (Visitor), pozwalająca na rekurencyjne
+ * obliczanie kosztu energii dla całej struktury budynku.
+ */
 public class EnergyCostVisitor implements Visitor {
     private double energyCost;
     private EnergyVisitor energyVisitor = new EnergyVisitor();
